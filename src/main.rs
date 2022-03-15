@@ -5,15 +5,12 @@ use actix_web::{get, web, App, HttpServer, Responder};
 use modules::*;
 use tera::Tera;
 use std::borrow::Borrow;
-use std::env;
+use actix_files::Files;
+use std::{env};
 
 
 extern crate log;
 
-#[get("/{id}/{name}/index.html")]
-async fn index(web::Path((id, name)): web::Path<(u32, String)>) -> impl Responder {
-    format!("Hello {}! id:{}", name, id)
-}
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -37,12 +34,12 @@ async fn main() -> std::io::Result<()> {
             Tera::new(template_dir.borrow()).unwrap();
         App::new()
             .data(tera)
+            .service(Files::new("/assets", "./public").index_file("index.html"))
             .service(home::controllers::home_controller::index)
             .service(home::controllers::about_controller::me)
             .service(home::controllers::admin_controller::login)
             .service(home::controllers::admin_controller::logout)
             .service(home::controllers::payment_controller::index)
-            .service(index)
     })
         .bind(listen_port_str)?
         .run()

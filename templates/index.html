@@ -1,17 +1,593 @@
-<!DOCTYPE html>
-<html>
+<?xml version="1.0" encoding="{$lang['charset']}"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- $versionlong  -->
+<!-- Build: $versionbuild -->
+<!-- $versioncompany -->
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-
-    <title>NFido</title>
+    <!--$baseelement$canonical_link-->
+    <meta http-equiv="Content-Type" content="text/html; charset={$lang['charset']}" />
+    <meta name="viewport" content="width=500, initial-scale=1" />
+    <title>{$SETTINGS['bbname']} $threadSubject - $versionlong</title>
+    <link rel='stylesheet' type='text/css' href='/assets/css/default.css' />
+    <script language="JavaScript" type="text/javascript" src="./js/header.js?v=2"></script>
 </head>
+<body text="{$THEME['text']}">
 
-<body>
-<h1>NFido</h1>
+<!--
+$bbcodescript
+<a name="top"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="{$THEME['tablewidth']}" align="center">
+    <tr>
+        <td bgcolor="{$THEME['bordercolor']}">
+            <table border="0" cellspacing="{$THEME['borderwidth']}" cellpadding="6" width="100%">
+                <tr>
+                    <td width="74%" {$THEME['topbgcode']}>
+                    <table border="0" width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td valign="top" rowspan="2">{$THEME['logo']}</td>
+                            <td align="right" valign="top"><font class="smalltxt">$lastvisittext<br />$newu2umsg</font></td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="bottom"><font class="smalltxt">$notify</font></td>
+                        </tr>
+                    </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="navtd">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="navtd"><font class="navtd">$searchlink $links $pluglink</font></td>
+                                <td align="right"><a href="$siteurl" title="$sitename"><font class="navtd">$lang[backto] <img src="{$THEME['imgdir']}/top_home.gif" border="0" alt="$sitename" /></font></a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<table cellspacing="0" cellpadding="1" border="0" width="{$THEME['tablewidth']}" align="center">
+    <tr>
+        <td><table width="100%" cellspacing="0" cellpadding="{$THEME['tablespace']}" align="center">
+            <tr>
+                <td class="nav"> <a href="./">$bbname</a> $navigation</td>
+                <td align="right">$quickjump</td>
+                <td align="right" width="1"><a href="#bottom" title="$lang[gotobottom]"><img src="{$THEME['imgdir']}/arrow_dw.gif" border="0" alt="$lang[gotobottom]" /></a></td>
+            </tr>
+        </table>
+        </td>
+    </tr>
+</table>
+<br />
+
+
+<br />
+<table cellspacing="{$THEME['borderwidth']}" cellpadding="0" border="0" width="{$THEME['tablewidth']}" align="center" bgcolor="{$THEME['bordercolor']}">
+    <tr>
+        <td>
+            <table width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="nav" style="padding-bottom: 1px" bgcolor="{$THEME['altbg2']}">&nbsp;<a href="./">$bbname</a>$navigation</td>
+                    <td class="tablerow" align="right" bgcolor="{$THEME['altbg2']}">$quickjump&nbsp;</td>
+                    <td align="right" bgcolor="{$THEME['altbg2']}" width="2%"><a href="#top" title="$lang[gototop]"><img src="{$THEME['imgdir']}/arrow_up.gif" style="margin-right: 3px" border="0" alt="$lang[gototop]" /></a></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<br />
+<table cellspacing="0" cellpadding="0" border="0" width="{$THEME['tablewidth']}" align="center">
+    <tr>
+        <td bgcolor="{$THEME['bordercolor']}">
+            <table border="0" cellspacing="{$THEME['borderwidth']}" cellpadding="{$THEME['tablespace']}" width="100%">
+                <tr class="ctrtablerow">
+                    <td class="smalltxt" bgcolor="{$THEME['altbg2']}">
+                        $versionlong
+                        <br />
+                        <a href="https://www.xmbforum2.com/" onclick="window.open(this.href); return false;"><strong>{$lang['xmbforum']}</strong></a>&nbsp;&copy; $copyright $lang[xmbgroup]
+                        <br />
+                        $footerstuff[totaltime]
+                        $footerstuff[querynum]
+                        $footerstuff[phpsql]
+                        $footerstuff[load]
+                        $footerstuff[querydump]
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<a id="bottom" name="bottom"></a>-->
+
+
+
+
+
+
+<a name="top"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="6" width="100%">
+                <tr>
+                    <td width="74%" style='background-image: url(images/davis/topbg.gif)'>
+                        <table border="0" width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="top" rowspan="2"><a href="./"><img src="images/davis/logo3.gif" alt="XMB Forum Software" border="0" /></a></td>
+                                <td align="right" valign="top"><font class="smalltxt"><br /></font></td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="bottom"><font class="smalltxt">Not logged in [<a href="misc.php?action=login">Login</a> - <a href="member.php?action=reg">Register</a>]</font></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="navtd">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="navtd"><font class="navtd"><img src="images/davis/top_search.gif" alt="Search the forums" border="0" /> <a href="search.php"><font class="navtd">Search</font></a> &nbsp;  <img src="images/davis/top_faq.gif" alt="Frequently Asked Questions" border="0" /> <a href="faq.php"><font class="navtd">FAQ</font></a> &nbsp; <img src="images/davis/top_memberslist.gif" alt="View member list" border="0" /> <a href="misc.php?action=list"><font class="navtd">Member List</font></a> &nbsp; <img src="images/davis/top_todaysposts.gif" alt="Today's Posts" border="0" /> <a href="today.php"><font class="navtd">Today's Posts</font></a> &nbsp; <img src="images/davis/top_stats.gif" alt="Forum Stats" border="0" /> <a href="stats.php"><font class="navtd">Stats</font></a> &nbsp; <img src="images/davis/top_bbrules.gif" alt="Board Rules" border="0" /> <a href="faq.php?page=forumrules"><font class="navtd">Board Rules</font></a> &nbsp;<img src="/images/davis/top_bbrules.gif" border="0" alt="Download" />&nbsp;<a href="download.php"><font class="navtd">Download</font></a>&nbsp;&nbsp;&nbsp;<img src="/images/davis/top_bbrules.gif" border="0" alt="SVN" />&nbsp;<a href="https://sourceforge.net/p/xmb-forum/code/HEAD/tree/"><font class="navtd">SVN</font></a>&nbsp;&nbsp;&nbsp;<img src="/images/davis/top_bbrules.gif" border="0" alt="Bugs" />&nbsp;<a href="https://bugs.xmbforum2.com/"><font class="navtd">Bugs</font></a>&nbsp;&nbsp;&nbsp;<img src="/images/davis/top_bbrules.gif" border="0" alt="Docs" />&nbsp;<a href="https://docs.xmbforum2.com/"><font class="navtd">Docs</font></a>&nbsp;</font></td>
+                                <td align="right"><a href="https://www.xmbforum2.com/" title="XMB Forum Home Page"><font class="navtd">Back to: <img src="images/davis/top_home.gif" border="0" alt="XMB Forum Home Page" /></font></a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<table cellspacing="0" cellpadding="1" border="0" width="97%" align="center">
+    <tr>
+        <td><table width="100%" cellspacing="0" cellpadding="5px" align="center">
+            <tr>
+                <td class="nav"> <a href="./">XMB Forum Software</a> </td>
+                <td align="right"></td>
+                <td align="right" width="1"><a href="#bottom" title="Go To Bottom"><img src="images/davis/arrow_dw.gif" border="0" alt="Go To Bottom" /></a></td>
+            </tr>
+        </table>
+        </td>
+    </tr>
+</table>
+<br />
+
+
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="5px" width="100%">
+                <tr>
+                    <td class="category" colspan="2"><font color="#163c4b"><strong>You Are Not Registered Or Not Logged In</strong></font></td>
+                </tr>
+                <tr bgcolor="#f4f7f8" class="tablerow">
+                    <td><font size="1">If you are not registered or logged in, you may still be able to view forums and topics, but you will not have access to your user control panel or settings</font></td>
+                    <td align="right" width="25%">
+                        <form method="post" action="misc.php?action=login" onsubmit="return disableButton(this);">
+                            <input type="hidden" name="token" value="" />
+                            <input type="hidden" name="hide" value="2" />
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td nowrap="nowrap">
+                                        <input type="text" name="username" size="7" accesskey="u" />
+                                        <input type="password" name="password" size="7" accesskey="p" />
+                                        <input type="submit" class="submit" name="loginsubmit" value="Login" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<br />
+
+
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="5px" width="100%" align="center" class="tablelinks">
+
+                <tr>
+                    <td colspan="5" class="category"><a href="index.php?gid=443"><font color="#163c4b"><strong>General</strong></font></a></td>
+                </tr>
+
+                <tr class="header" align="center">
+                    <td width="4%">&nbsp;</td>
+                    <td width="54%">Forum:</td>
+                    <td width="6%">Topics:</td>
+                    <td width="6%">Posts:</td>
+                    <td width="19%">Last Post:</td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=1"><font class="mediumtxt"><strong>Announcements</strong></font><br /><br /><font class="smalltxt">Service Bulletins and Administrative Announcements.</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">30</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">167</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=1" title="Go to last post" class="smalltxt">2-12-2022 at 06:35 PM<br />by miqrogroove</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=1" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=29"><font class="mediumtxt"><strong>Social Discussions</strong></font><br /><br /><font class="smalltxt">You can discuss anything off topic here. Be appropriate though.</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">40</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">308</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=29" title="Go to last post" class="smalltxt">2-12-2022 at 06:22 PM<br />by miqrogroove</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=29" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=105"><font class="mediumtxt"><strong>Feedback &amp; Suggestions</strong></font><br /><br /><font class="smalltxt">Post your feedback and suggestions about the site here.</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">10</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">43</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=105" title="Go to last post" class="smalltxt">9-20-2020 at 08:30 PM<br />by Magnumxe</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=105" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+<br />
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="5px" width="100%" class="tablelinks">
+
+                <tr>
+                    <td colspan="5" class="category"><a href="index.php?gid=20"><font color="#163c4b"><strong>Support</strong></font></a></td>
+                </tr>
+
+                <tr class="header" align="center">
+                    <td width="4%">&nbsp;</td>
+                    <td width="54%">Forum:</td>
+                    <td width="6%">Topics:</td>
+                    <td width="6%">Posts:</td>
+                    <td width="19%">Last Post:</td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=469"><font class="mediumtxt"><strong>XMB Support 1.9.12</strong></font><br /><br /><font class="smalltxt">General discussion and information about <b>XMB 1.9.12</b> Installations, Upgrades, Problems, Bugs, and general questions about this release.</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">6</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">21</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=469" title="Go to last post" class="smalltxt">11-14-2021 at 12:12 PM<br />by alkutob</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=469" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=21"><font class="mediumtxt"><strong>XMB Support 1.9.11</strong></font><br /><br /><font class="smalltxt">General discussion and information about <b>XMB 1.9.11</b> Installations, Problems, Bugs, Fixes and general questions about this release.</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">139</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">783</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=21" title="Go to last post" class="smalltxt">4-11-2021 at 02:32 PM<br />by miqrogroove</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=21" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=440"><font class="mediumtxt"><strong>Fixes / Patches</strong></font><br /><br /><font class="smalltxt">Patches Specific to New Issues.</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">35</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">41</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=440" title="Go to last post" class="smalltxt">5-10-2021 at 03:14 PM<br />by miqrogroove</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=440" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=353"><font class="mediumtxt"><strong>International Support Forums</strong></font><br /><br /><font class="smalltxt">General discussion and information <b>in various languages</b>. Installations, Problems, Bugs, Fixes and general questions. </font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">18</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">55</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=353" title="Go to last post" class="smalltxt">5-8-2021 at 03:21 PM<br />by miqrogroove</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=353" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+<br />
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="5px" width="100%" class="tablelinks">
+
+                <tr>
+                    <td colspan="5" class="category"><a href="index.php?gid=467"><font color="#163c4b"><strong>Customization</strong></font></a></td>
+                </tr>
+
+                <tr class="header" align="center">
+                    <td width="4%">&nbsp;</td>
+                    <td width="54%">Forum:</td>
+                    <td width="6%">Topics:</td>
+                    <td width="6%">Posts:</td>
+                    <td width="19%">Last Post:</td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=442"><font class="mediumtxt"><strong>Hacks Support</strong></font><br /><br /><font class="smalltxt">General Support and information for <b>XMB 1.9.11</b>.<br />
+                        Note: While you are welcome to post, the current reality is that there are no active developers, no hacks being developed, no timeline for a new xmb, minimal support requests, even less support staff.</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">38</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">151</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=442" title="Go to last post" class="smalltxt">11-14-2021 at 10:21 PM<br />by alkutob</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=442" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=431"><font class="mediumtxt"><strong>Hacks Requests</strong></font><br /><br /><font class="smalltxt">Request a mod or hack for here for <b>XMB 1.9.11</b>.</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">56</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">253</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=431" title="Go to last post" class="smalltxt">5-4-2021 at 03:22 AM<br />by lottos</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=431" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=447"><font class="mediumtxt"><strong>Hacks Development</strong></font><br /><br /><font class="smalltxt">A place for Hacks Authors to post hacks still in development for <b>XMB 1.9.11</b>.</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">32</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">128</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=447" title="Go to last post" class="smalltxt">11-14-2021 at 12:15 PM<br />by alkutob</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=447" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=349"><font class="mediumtxt"><strong>Themes Support</strong></font><br /><br /><font class="smalltxt">Theme support can be found here for <b>XMB 1.9.11</b>.</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">17</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">58</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=349" title="Go to last post" class="smalltxt">10-26-2018 at 09:42 PM<br />by lottos</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=349" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=348"><font class="mediumtxt"><strong>Themes Releases</strong></font><br /><br /><font class="smalltxt">Themes releases can be found and shared here for <b>XMB 1.9.11</b>.</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">8</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">28</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=348" title="Go to last post" class="smalltxt">9-16-2017 at 07:34 AM<br />by Scarlet</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=348" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+<br />
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="5px" width="100%" class="tablelinks">
+
+                <tr>
+                    <td colspan="5" class="category"><a href="index.php?gid=140"><font color="#163c4b"><strong>XMB Development</strong></font></a></td>
+                </tr>
+
+                <tr class="header" align="center">
+                    <td width="4%">&nbsp;</td>
+                    <td width="54%">Forum:</td>
+                    <td width="6%">Topics:</td>
+                    <td width="6%">Posts:</td>
+                    <td width="19%">Last Post:</td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="4%"><img src="images/davis/folder.gif" alt="Folder" border="0" /></td>
+                    <td bgcolor="#f4f7f8" class="tablerow" width="54%"><a href="./forumdisplay.php?fid=468"><font class="mediumtxt"><strong>1.9.12 Beta Chat</strong></font><br /><br /><font class="smalltxt">Tell us what you like and what you broke!</font></a><span class="smalltxt plainlinks"></span><font class="smalltxt"></font></td>
+                    <td bgcolor="#FFFFFF" class="ctrtablerow" width="6%"><font class="mediumtxt">10</font></td>
+                    <td bgcolor="#f4f7f8" class="ctrtablerow" width="6%"><font class="mediumtxt">86</font></td>
+                    <td bgcolor="#FFFFFF" class="lastpostcell" width="19%"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr class="rghttablerow">
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=468" title="Go to last post" class="smalltxt">4-14-2021 at 05:42 AM<br />by miqrogroove</a></td>
+                            <td bgcolor="#FFFFFF" nowrap="nowrap"><a href="./viewthread.php?goto=lastpost&amp;fid=468" title="Go to last post"><img src="images/davis/lastpost.gif" border="0" alt="Go to last post" /></a></td>
+                        </tr>
+                    </table>
+
+                    </td>
+                </tr>
+
+
+            </table>
+        </td>
+    </tr>
+</table>
+<br />
+<table border="0" cellpadding="0" cellspacing="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                <tr>
+                    <td class="tablerow" colspan="2" width="100%">
+                        <table cellspacing="1px" cellpadding="5px" border="0" width="100%" align="center">
+                            <tr>
+                                <td colspan="2" class="category">
+                                    <a href="misc.php?action=online"><strong><font color="#163c4b">Who's Online</font></strong></a><font color="#163c4b"> - <span class='smalltxt'>There are currently <strong>4</strong> Guests, <strong>0</strong> Members and <strong>0</strong> Invisible Members browsing XMB Forum Software</span></font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF" colspan="2" class="smalltxt">
+                                    Key:
+                                    <span class="status_Super_Administrator">Super Administrator</span> -
+                                    <span class="status_Administrator">Administrators</span> -
+                                    <span class="status_Super_Moderator">Super Moderators</span> -
+                                    <span class="status_Moderator">Moderators</span> -
+                                    <span class="status_Member">All Registered Members</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF" align="center" width="4%">
+                                    <img src="images/davis/online.gif" alt="Who's Online" border="0" />
+                                </td>
+                                <td bgcolor="#f4f7f8" class="mediumtxt">
+                                    &nbsp;&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="category">
+                                    <a href="misc.php?action=onlinetoday"><strong><font color="#163c4b">[+] Last 50 Members Who Have Visited Today (if applicable)</font></strong></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#f4f7f8" colspan="2" class="mediumtxt">
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF" colspan="2" class="mediumtxt">0 members have visited the site today</td>
+                            </tr>
+
+
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+<br />
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="5px" width="100%">
+                <tr>
+                    <td align="left" class="category"><font color="#163c4b"><strong>Stats:</strong></font></td>
+                    <td align="left" class="category"><font color="#163c4b"><strong>Key: </strong></font></td>
+                </tr>
+                <tr class="tablerow" bgcolor="#f4f7f8">
+                    <td width="50%" align="left" valign="top"><strong>530</strong> topics / <strong>2858</strong> posts / <strong>428</strong> members<br />Please welcome our newest member <a href="member.php?action=viewpro&amp;member=TenderHeart"><strong>TenderHeart</strong></a>.</td>
+                    <td width="50%" align="left" valign="top"><img src="images/davis/red_folder.gif" alt="Red Folder" /> = New posts in this forum since last active<br /><img src="images/davis/folder.gif" alt="Normal Folder" /> = No new posts in this forum since last active</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+
+<br />
+<table cellspacing="1px" cellpadding="0" border="0" width="97%" align="center" bgcolor="#86a9b6">
+    <tr>
+        <td>
+            <table width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="nav" style="padding-bottom: 1px" bgcolor="#f4f7f8">&nbsp;<a href="./">XMB Forum Software</a></td>
+                    <td class="tablerow" align="right" bgcolor="#f4f7f8">&nbsp;</td>
+                    <td align="right" bgcolor="#f4f7f8" width="2%"><a href="#top" title="Go To Top"><img src="images/davis/arrow_up.gif" style="margin-right: 3px" border="0" alt="Go To Top" /></a></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<br />
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="5px" width="100%">
+                <tr class="ctrtablerow">
+                    <td class="smalltxt" bgcolor="#f4f7f8">
+                        Powered by XMB 1.9.12
+                        <br />
+                        <a href="https://www.xmbforum2.com/" onclick="window.open(this.href); return false;"><strong><abbr title="eXtreme Message Board">XMB</abbr> Forum Software</strong></a>&nbsp;&copy; 2001-2021 The XMB Group
+                        <br />
+
+                        [Queries: <strong>12</strong>]
+
+
+                        [PHP: <strong>54.7%</strong> - SQL: <strong>45.3%</strong>]
+
+
+
+
+                        <br />
+                        <!-- Thanks to <a href="https://www.lottos.com.au/competitions/" title="competitions">competitions</a> website. -->
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<a id="bottom" name="bottom"></a>
+
+
 </body>
 </html>
