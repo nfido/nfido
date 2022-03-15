@@ -7,8 +7,9 @@ edition = "2021"
 
 [dependencies]
 
-log = "0.4.0"
-tera = "1.8"
-env_logger = "0.8.3"
-actix-web = "3"
-actix-http = "2.2.0"
+log = "0.4.14"
+tera = "1.15.0"
+env_logger = "0.9.0"
+actix-web = "4.0.1"
+actix-http = "3.0.4"
+actix-files = "0.6.0"
