@@ -1,0 +1,16 @@
+[Unit]
+Description=nfido Service
+After=network.target
+Wants=network.target
+
+[Service]
+WorkingDirectory=/home/data/www/nfido
+Type=simple
+ExecStart=/home/data/www/nfido/nfido
+Restart=always
+# Don't restart in the case of configuration error
+RestartPreventExitStatus=23
+
+
+[Install]
+WantedBy=multi-user.target
