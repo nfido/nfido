@@ -3,7 +3,7 @@ body {
     scrollbar-arrow-color: #d3dfe4;
     scrollbar-base-color: #FFFFFF;
     text-align: left;
-    background-image: url(images/davis/bg.gif);
+    background-image: url(/assets/images/davis/bg.gif);
 }
 
 a {
@@ -99,7 +99,7 @@ textarea, select, input, object {
 }
 
 .category {
-    background-image: url(images/davis/catbar.gif);
+    background-image: url(/assets/images/davis/catbar.gif);
     font-family: Tahoma, Arial, Helvetica, Verdana;
     font-size: 11px;
     table-layout: fixed;
@@ -107,7 +107,7 @@ textarea, select, input, object {
 }
 
 .ctrcategory {
-    background-image: url(images/davis/catbar.gif);
+    background-image: url(/assets/images/davis/catbar.gif);
     font-family: Tahoma, Arial, Helvetica, Verdana;
     font-size: 11px;
     table-layout: fixed;
