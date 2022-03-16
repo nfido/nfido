@@ -18,6 +18,12 @@
 
 论坛基于 Rust 语言开发，使用PostgreSQL 数据库。
 
+文档： https://nfido.doc.bsmi.info
+
+网站： https://nfido.bsmi.info
+
+文档源代码： https://github.com/nfido/nfido-doc
+
 # 许可证
 
 简单介绍一下本项目的许可证,是AGPL, 如果你修改了本软件, 通网络提供公开服务,那么你必须开源代码(但是不包括你的什么账号密码这些私有信息)
