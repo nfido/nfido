@@ -41,7 +41,10 @@ async fn main() -> std::io::Result<()> {
             .service(home::controllers::admin_controller::login)
             .service(home::controllers::admin_controller::logout)
             .service(home::controllers::payment_controller::index)
+            // 帖子列表页
             .service(forumdisplay::controllers::home_controller::index)
+            // 帖子详情页
+            .service(viewthread::controllers::home_controller::index)
     })
         .bind(listen_port_str)?
         .run()
