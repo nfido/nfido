@@ -1,0 +1,34 @@
+
+dbdsn="user=postgres password=postgres dbname=nfido host=127.0.0.1 port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+admin_user = ["admin","root"]
+admin_email = "admin@example.com"
+site_name = "nfido"
+site_description = "My memory about leobbs"
+# 加密密码用的盐
+key_of_encrypt = "nfidoabc1314"
+[object_storage]
+aws_access_key_id = "*****"
+aws_secret_access_key = "******"
+aws_region = "us-east-1"
+aws_bucket = "www.domain.com"
+cdn_url = "//www.domain.com"
+[email]
+smtp_host = "smtp.example.com"
+smtp_port = 25
+username = "master@domain.com"
+password = "securitypassword"
+from_email = "example@example.com"
+[tongji_config]
+tongji_enabled=1
+tongji_code='''
+<script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?73258af02049f461ac06ca5f9d9b1f55";
+            hm.async = true;
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+'''
