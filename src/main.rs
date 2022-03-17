@@ -18,7 +18,7 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
 
     let listen_port_str = "127.0.0.1:8086";
-    println!("Listening on {}", listen_port_str);
+    println!("Listening on http://{}", listen_port_str);
 
     HttpServer::new(|| {
 
