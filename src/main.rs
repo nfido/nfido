@@ -1,12 +1,13 @@
 
 pub mod modules;
-use actix_web::{get, web, App, HttpServer, Responder};
+use actix_web::{ App, HttpServer};
 
 use modules::*;
 use tera::Tera;
 use std::borrow::Borrow;
 use actix_files::Files;
 use std::{env};
+use actix_web::web::Data;
 
 
 extern crate log;
@@ -33,13 +34,14 @@ async fn main() -> std::io::Result<()> {
         let tera =
             Tera::new(template_dir.borrow()).unwrap();
         App::new()
-            .data(tera)
+            .app_data(Data::new(tera))
             .service(Files::new("/assets", "./public").index_file("index.html"))
             .service(home::controllers::home_controller::index)
             .service(home::controllers::about_controller::me)
             .service(home::controllers::admin_controller::login)
             .service(home::controllers::admin_controller::logout)
             .service(home::controllers::payment_controller::index)
+            .service(forumdisplay::controllers::home_controller::index)
     })
         .bind(listen_port_str)?
         .run()
