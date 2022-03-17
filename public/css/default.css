@@ -341,3 +341,8 @@ body {
     background-repeat: repeat-x;
     background-color: #fff;
 }
+
+.logo-banner-container {
+    background-size: contain;
+    background-image: url(/assets/images/davis/topbg.gif);
+}
