@@ -16,3 +16,11 @@ actix-files = "0.6.0"
 config = "0.12"
 serde = {version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+#log lib
+fast_log = "1.5"
+#async runtime lib
+tokio = { version = "1.12", features = ["full"] }
+async-std = { version = "1.9", features = ["attributes", "tokio1"] }
+#rbatis lib(debug_mode will print json data)
+rbson = { version = "2.0.3", features = ["uuid-0_8", "chrono-0_4"] }
+rbatis = "3"
