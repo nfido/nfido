@@ -7,6 +7,6 @@ pub async fn index(tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> R
     let s = tmpl.render("index.html", &tera::Context::new())
         .map_err(|_| error::ErrorInternalServerError("Termplate error"));
 
-    println!("The config: {}", serde_json::to_string(conf.get_ref()).unwrap());
+    log::info!("The site name: {}", conf.site_name.to_owned());
     Ok(HttpResponse::Ok().content_type("text/html").body(s.unwrap()))
 }
