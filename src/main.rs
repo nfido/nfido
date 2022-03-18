@@ -1,6 +1,7 @@
 
 pub mod modules;
 use actix_web::{ App, HttpServer};
+use config::Config;
 
 use modules::*;
 use tera::Tera;
@@ -8,7 +9,7 @@ use std::borrow::Borrow;
 use actix_files::Files;
 use std::{env};
 use actix_web::web::Data;
-
+use crate::appconfig::appconfig::AppConfig;
 
 extern crate log;
 
@@ -23,6 +24,14 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| {
 
+        //加载配置文件
+        let settings = Config::builder()
+            .add_source(config::File::with_name("./config.toml"))
+            .build()
+            .unwrap();
+
+        let app_config: AppConfig = settings.try_deserialize().unwrap();
+
         let base_dir = env::current_dir().expect("not found path");
 
 
@@ -35,6 +44,8 @@ async fn main() -> std::io::Result<()> {
             Tera::new(template_dir.borrow()).unwrap();
         App::new()
             .app_data(Data::new(tera))
+            // 注入配置
+            .app_data(Data::new(app_config))
             .service(Files::new("/assets", "./public").index_file("index.html"))
             .service(home::controllers::home_controller::index)
             .service(home::controllers::about_controller::me)
