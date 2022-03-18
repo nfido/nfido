@@ -1,6 +1,6 @@
 
 use actix_web::{get, error, web, Error, HttpResponse, Result};
-use crate::AppConfig;
+use crate::appconfig::appconfig::AppConfig;
 
 #[get("/")]
 pub async fn index(tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error>{
