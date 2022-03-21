@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html>
+<!-- $versionlong  -->
+<!-- Build: $versionbuild -->
+<!-- $versioncompany -->
+<head>
+    <!--$baseelement$canonical_link-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=500, initial-scale=1" />
+    <title>NFido 论坛 - Power the community！</title>
+    <link rel='stylesheet' type='text/css' href='/assets/css/default.css' />
+    <script type="text/javascript" src="/assets/js/header.js?v=2"></script>
+</head>
+<body text="{$THEME['text']}">
+
+
+
+
+
+
+
+<a name="top"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="6" width="100%">
+                <tr>
+                    <td width="74%" class="logo-banner-container">
+                        <table border="0" width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="top" rowspan="2"><a href="./"><img src="/assets/images/logo.png" alt="NFido 论坛" border="0" /></a></td>
+                                <td align="right" valign="top"><font class="smalltxt"><br /></font></td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="bottom"><font class="smalltxt">未登录 [<a href="/misc?action=login">登录</a> - <a href="member.php?action=reg">注册</a>]</font></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="navtd">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="navtd">
+                                    <font class="navtd"><img src="/assets/images/davis/top_search.gif" alt="搜索" border="0" />
+                                        <a href="search.php"><font class="navtd">搜索</font></a> &nbsp;
+                                        <img src="/assets/images/davis/top_faq.gif" alt="FAQ" border="0" />
+                                        <a href="faq.php"><font class="navtd">FAQ</font></a> &nbsp;
+                                        <img src="/assets/images/davis/top_memberslist.gif" alt="查看用户列表" border="0" />
+                                        <a href="/misc?action=list"><font class="navtd">用户列表</font></a> &nbsp;
+                                        <img src="/assets/images/davis/top_todaysposts.gif" alt="今日帖子" border="0" />
+                                        <a href="today.php"><font class="navtd">今日帖子</font></a> &nbsp;
+                                        <img src="/assets/images/davis/top_stats.gif" alt="论坛统计" border="0" />
+                                        <a href="stats.php"><font class="navtd">统计</font></a> &nbsp;
+                                        <img src="/assets/images/davis/top_bbrules.gif" alt="论坛须知" border="0" />
+                                        <a href="faq.php?page=forumrules"><font class="navtd">论坛须知</font></a> &nbsp;
+                                        <img src="/assets/images/davis/top_bbrules.gif" border="0" alt="下载" />&nbsp;
+                                        <a href="https://github.com/nfido/nfido/releases"><font class="navtd">下载</font></a>&nbsp;&nbsp;&nbsp;
+                                        <img src="/assets/images/davis/top_bbrules.gif" border="0" alt="源码" />&nbsp;
+                                        <a href="https://github.com/nfido/nfido"><font class="navtd">源码</font></a>&nbsp;&nbsp;&nbsp;
+                                        <img src="/assets/images/davis/top_bbrules.gif" border="0" alt="问题" />&nbsp;
+                                        <a href="https://github.com/nfido/nfido/issues"><font class="navtd">问题</font></a>&nbsp;&nbsp;&nbsp;
+                                        <img src="/assets/images/davis/top_bbrules.gif" border="0" alt="文档" />&nbsp;
+                                    <a href="https://nfido.doc.bsmi.info/"><font class="navtd">文档</font></a>&nbsp;</font></td>
+                                <td align="right"><a href="https://nfido.bsmi.info/" title="NFido 论坛首页"><font class="navtd">返回: <img src="/assets/images/davis/top_home.gif" border="0" alt="NFido论坛首页" /></font></a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<table cellspacing="0" cellpadding="1" border="0" width="97%" align="center">
+    <tr>
+        <td><table width="100%" cellspacing="0" cellpadding="5px" align="center">
+            <tr>
+                <td class="nav"> <a href="./">XMB Forum Software</a> </td>
+                <td align="right"></td>
+                <td align="right" width="1"><a href="#bottom" title="Go To Bottom"><img src="/assets/images/davis/arrow_dw.gif" border="0" alt="Go To Bottom" /></a></td>
+            </tr>
+        </table>
+        </td>
+    </tr>
+</table>
+<br />
+
+
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="5px" width="100%">
+                <tr>
+                    <td class="category" colspan="2"><font color="#163c4b"><strong>You Are Not Registered Or Not Logged In</strong></font></td>
+                </tr>
+                <tr bgcolor="#f4f7f8" class="tablerow">
+                    <td><font size="1">If you are not registered or logged in, you may still be able to view forums and topics, but you will not have access to your user control panel or settings</font></td>
+                    <td align="right" width="25%">
+                        <form method="post" action="/misc?action=login" onsubmit="return disableButton(this);">
+                            <input type="hidden" name="token" value="" />
+                            <input type="hidden" name="hide" value="2" />
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td nowrap="nowrap">
+                                        <input type="text" name="username" size="7" accesskey="u" />
+                                        <input type="password" name="password" size="7" accesskey="p" />
+                                        <input type="submit" class="submit" name="loginsubmit" value="Login" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<br />
+
+
+{% block content %}
+
+{% endblock content %}
+
+<br />
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="5px" width="100%">
+                <tr>
+                    <td align="left" class="category"><font color="#163c4b"><strong>Stats:</strong></font></td>
+                    <td align="left" class="category"><font color="#163c4b"><strong>Key: </strong></font></td>
+                </tr>
+                <tr class="tablerow" bgcolor="#f4f7f8">
+                    <td width="50%" align="left" valign="top"><strong>530</strong> topics / <strong>2858</strong> posts / <strong>428</strong> members<br />Please welcome our newest member <a href="member.php?action=viewpro&amp;member=TenderHeart"><strong>TenderHeart</strong></a>.</td>
+                    <td width="50%" align="left" valign="top"><img src="/assets/images/davis/red_folder.gif" alt="Red Folder" /> = New posts in this forum since last active<br /><img src="/assets/images/davis/folder.gif" alt="Normal Folder" /> = No new posts in this forum since last active</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+
+<br />
+<table cellspacing="1px" cellpadding="0" border="0" width="97%" align="center" bgcolor="#86a9b6">
+    <tr>
+        <td>
+            <table width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="nav" style="padding-bottom: 1px" bgcolor="#f4f7f8">&nbsp;<a href="./">XMB Forum Software</a></td>
+                    <td class="tablerow" align="right" bgcolor="#f4f7f8">&nbsp;</td>
+                    <td align="right" bgcolor="#f4f7f8" width="2%"><a href="#top" title="Go To Top"><img src="/assets/images/davis/arrow_up.gif" style="margin-right: 3px" border="0" alt="Go To Top" /></a></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<br />
+<table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+    <tr>
+        <td bgcolor="#86a9b6">
+            <table border="0" cellspacing="1px" cellpadding="5px" width="100%">
+                <tr class="ctrtablerow">
+                    <td class="smalltxt" bgcolor="#f4f7f8">
+                        Powered by XMB 1.9.12
+                        <br />
+                        <a href="https://www.xmbforum2.com/" onclick="window.open(this.href); return false;"><strong><abbr title="eXtreme Message Board">XMB</abbr> Forum Software</strong></a>&nbsp;&copy; 2001-2021 The XMB Group
+                        <br />
+
+                        [Queries: <strong>12</strong>]
+
+
+                        [PHP: <strong>54.7%</strong> - SQL: <strong>45.3%</strong>]
+
+
+
+
+                        <br />
+                        <!-- Thanks to <a href="https://www.lottos.com.au/competitions/" title="competitions">competitions</a> website. -->
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<a id="bottom" name="bottom"></a>
+
+
+</body>
+</html>
