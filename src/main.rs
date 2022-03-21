@@ -80,6 +80,10 @@ async fn main() -> std::io::Result<()> {
             .service(forumdisplay::controllers::home_controller::index)
             // 帖子详情页
             .service(viewthread::controllers::home_controller::index)
+            // 注册
+            .service(account::controllers::reg_controller::reg)
+            //登录
+            .service(account::controllers::login_controller::login)
     })
         .bind(listen_port_str)?
         .run()
