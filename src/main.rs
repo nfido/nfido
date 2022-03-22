@@ -84,6 +84,8 @@ async fn main() -> std::io::Result<()> {
             .service(account::controllers::reg_controller::reg)
             //登录
             .service(account::controllers::login_controller::login)
+            //检测注册用户名
+            .service(account::controllers::reg_controller::check_username)
     })
         .bind(listen_port_str)?
         .run()
