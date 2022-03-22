@@ -195,7 +195,7 @@ class Manager {
         // Next, authenticate the login.
         foreach($this->mechanisms as $session) {
             // Fetch the user record
-            $data = $session->check_username();
+            $data = $session->checkUsername();
 
             // Check for errors
             if ( 'good' == $data->status ) {
@@ -322,7 +322,7 @@ interface Mechanism {
      *
      * @return Data
      */
-    public function check_username(): Data;
+    public function checkUsername(): Data;
 
     /**
      * Did the client provide a valid secret that matches the ID?
@@ -446,7 +446,7 @@ class FormsAndCookies implements Mechanism {
     const TEST_COOKIE = 'test';
     const USER_COOKIE = 'xmbuser';
     
-    public function check_username(): Data {
+    public function checkUsername(): Data {
         $data = new Data;
         $uinput = postedVar('username', '', true, false);
 
