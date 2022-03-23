@@ -4,5 +4,5 @@ use serde::{Serialize};
 pub struct CheckUsernameResult<T> {
     pub code: u64,
     pub msg: String,
-    pub data: T,
+    pub data: Option<T>,
 }
