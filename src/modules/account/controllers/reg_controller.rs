@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use actix_web::{get, error, web, Error, HttpResponse, Result, Responder};
 use crate::account::vo::check_username_req::CheckUsernameReq;
 use crate::appconfig::appconfig::AppConfig;
-use crate::account::vo::check_username_result::CheckUsernameResult;
+use crate::common::vo::common_result::CommonResult;
 
 
 #[get("/account/reg")]
@@ -29,7 +29,7 @@ pub async fn check_username(info: web::Query<CheckUsernameReq>) -> Result<impl R
     }
     let mut data= HashMap::new();
     data.insert("test_key".to_string(), "value I like".to_string());
-    let check_username_result = CheckUsernameResult{
+    let check_username_result = CommonResult{
         code: 0,
         msg: "".to_string(),
         data: Some(data),
