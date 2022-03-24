@@ -5,3 +5,5 @@ pub mod viewthread;
 pub mod appconfig;
 
 pub mod common;
+
+pub mod model;
