@@ -1,4 +1,7 @@
 #![allow(unused_must_use)]
+#[macro_use]
+extern crate rbatis;
+
 pub mod modules;
 use actix_web::{App, HttpServer};
 use config::Config;

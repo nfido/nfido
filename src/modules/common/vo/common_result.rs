@@ -1,4 +1,4 @@
-use serde::{Serialize};
+use serde::{Serialize, Deserialize};
 
 #[derive(Serialize,Deserialize)]
 pub struct CommonResult<T> {
