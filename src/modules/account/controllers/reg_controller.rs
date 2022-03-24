@@ -33,7 +33,10 @@ pub async fn check_username(info: web::Query<CheckUsernameReq>, rb: web::Data<Ar
         return Ok(web::Json(err_result));
     }
     //查数据库表，看昵称是不是被占用了
-    let vf = rb.fetch_by_column::<Option<NfidoMembers>, _>("username", info.username.to_string()).await.unwrap();
+    let vf = rb
+        .fetch_by_column::<Option<NfidoMembers>, _>("username", &info.username)
+        .await
+        .unwrap();
 
     if vf.is_some() {
         //查到 了记录
@@ -65,9 +68,10 @@ pub async fn check_email(info: web::Query<CheckEmailReq>, rb: web::Data<Arc<Rbat
 
 
     //查数据库表，看昵称是不是被占用了
-    let vf = rb.fetch_by_column::<Option<NfidoMembers>, _>("email",
-                                                           info.email.to_string())
-        .await.unwrap();
+    let vf = rb
+        .fetch_by_column::<Option<NfidoMembers>, _>("email",&info.email)
+        .await
+        .unwrap();
 
     if vf.is_some() {
         //查到 了记录
