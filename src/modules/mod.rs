@@ -7,3 +7,4 @@ pub mod appconfig;
 pub mod common;
 
 pub mod model;
+pub mod global_const;
