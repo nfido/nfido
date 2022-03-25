@@ -6,12 +6,19 @@ site_name = "nfido"
 site_description = "My memory about leobbs"
 # 加密密码用的盐
 key_of_encrypt = "nfidoabc1314"
+
+captcha_enabled=0
+h_captcha_site_key= ""
+h_captcha_secret_key=""
+
 [object_storage]
 aws_access_key_id = "*****"
 aws_secret_access_key = "******"
 aws_region = "us-east-1"
 aws_bucket = "www.domain.com"
 cdn_url = "//www.domain.com"
+
+
 [email]
 smtp_host = "smtp.example.com"
 smtp_port = 25
