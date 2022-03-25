@@ -24,6 +24,25 @@
 
 文档源代码： https://github.com/nfido/nfido-doc
 
+
+#  依赖
+
+项目需要openssl 
+
+```
+macOS
+$ brew install openssl@1.1
+
+Arch Linux
+$ sudo pacman -S pkg-config openssl
+
+Debian and Ubuntu
+$ sudo apt-get install pkg-config libssl-dev
+
+Fedora
+$ sudo dnf install pkg-config openssl-devel
+```
+
 # 许可证
 
 简单介绍一下本项目的许可证,是AGPL, 如果你修改了本软件, 通网络提供公开服务,那么你必须开源代码(但是不包括你的什么账号密码这些私有信息)
