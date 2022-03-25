@@ -8,3 +8,4 @@ pub mod common;
 
 pub mod model;
 pub mod global_const;
+pub mod captcha;
