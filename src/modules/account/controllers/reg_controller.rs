@@ -96,3 +96,16 @@ pub async fn check_email(info: web::Query<CheckEmailReq>, rb: web::Data<Arc<Rbat
     Ok(web::Json(check_result))
 }
 
+
+
+#[post("/account/doReg")]
+pub async fn do_reg(in_req: web::Form<FormData>, tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
+
+
+
+    let s = tmpl.render("account/reg.html", &tera::Context::new())
+        .map_err(|_| error::ErrorInternalServerError("Termplate error"));
+
+    log::info!("The site name: {}", conf.site_name.to_owned());
+    Ok(HttpResponse::Ok().content_type("text/html").body(s.unwrap()))
+}
