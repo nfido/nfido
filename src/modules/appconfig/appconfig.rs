@@ -23,7 +23,6 @@ pub struct AppConfig {
 
 
     //是否启用 hcaptcha
-    #[serde(default = "0")]
     pub captcha_enabled: i8,
     //=0
     // hcaptcha site key
