@@ -18,7 +18,7 @@
 
 论坛基于 Rust 语言开发，使用PostgreSQL 数据库。
 
-文档： https://nfido.doc.bsmi.info
+文档： https://nfido-doc.bsmi.info
 
 网站： https://nfido.bsmi.info
 
