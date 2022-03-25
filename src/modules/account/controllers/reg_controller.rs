@@ -1,10 +1,11 @@
 use std::collections::HashMap;
 use std::sync::Arc;
-use actix_web::{get, error, web, Error, HttpResponse, Result, Responder};
+use actix_web::{get, post, error, web, Error, HttpResponse, Result, Responder};
 use rbatis::crud::CRUD;
 use rbatis::rbatis::Rbatis;
 use crate::account::vo::check_email_req::CheckEmailReq;
 use crate::account::vo::check_username_req::CheckUsernameReq;
+use crate::account::vo::reg_form::RegForm;
 use crate::appconfig::appconfig::AppConfig;
 use crate::common::vo::common_result::CommonResult;
 use crate::global_const::{ERROR_ACCOUNT_EMAIL_EXISTS, ERROR_ACCOUNT_USERNAME_EXISTS};
@@ -99,7 +100,7 @@ pub async fn check_email(info: web::Query<CheckEmailReq>, rb: web::Data<Arc<Rbat
 
 
 #[post("/account/doReg")]
-pub async fn do_reg(in_req: web::Form<FormData>, tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
+pub async fn do_reg(_in_req: web::Form<RegForm>, tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
 
 
 
