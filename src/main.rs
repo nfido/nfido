@@ -91,6 +91,8 @@ async fn main() -> std::io::Result<()> {
             .service(account::controllers::reg_controller::check_username)
             //检测注册邮箱
             .service(account::controllers::reg_controller::check_email)
+            // 注册处理逻辑
+            .service(account::controllers::reg_controller::do_reg)
     })
         .bind(listen_port_str)?
         .run()

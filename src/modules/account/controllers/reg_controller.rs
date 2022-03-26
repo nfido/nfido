@@ -7,6 +7,7 @@ use crate::account::vo::check_email_req::CheckEmailReq;
 use crate::account::vo::check_username_req::CheckUsernameReq;
 use crate::account::vo::reg_form::RegForm;
 use crate::appconfig::appconfig::AppConfig;
+use crate::captcha::hcaptcha_verify::hcaptch_verify;
 use crate::common::vo::common_result::CommonResult;
 use crate::global_const::{ERROR_ACCOUNT_EMAIL_EXISTS, ERROR_ACCOUNT_USERNAME_EXISTS};
 use crate::model::nfido_members::NfidoMembers;
@@ -14,7 +15,11 @@ use crate::model::nfido_members::NfidoMembers;
 
 #[get("/account/reg")]
 pub async fn reg(tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
-    let s = tmpl.render("account/reg.html", &tera::Context::new())
+    let mut ctx = tera::Context::new();
+    //captcha key
+    ctx.insert("captcha_key", &conf.h_captcha_site_key);
+    let s = tmpl
+        .render("account/reg.html", &ctx)
         .map_err(|_| error::ErrorInternalServerError("Termplate error"));
 
     log::info!("The site name: {}", conf.site_name.to_owned());
@@ -101,10 +106,32 @@ pub async fn check_email(info: web::Query<CheckEmailReq>, rb: web::Data<Arc<Rbat
 
 #[post("/account/doReg")]
 pub async fn do_reg(_in_req: web::Form<RegForm>, tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
+    let  input_token;
+    match &_in_req.token {
+        Some(token) => input_token = token,
+        None => {
+            log::info!(" token没有输入");
+            let s = tmpl.render("account/reg_result.html", &tera::Context::new())
+                .map_err(|_| error::ErrorInternalServerError("Termplate error"));
 
+            log::info!("The site name: {}", conf.site_name.to_owned());
+            return Ok(HttpResponse::Ok().content_type("text/html").body(s.unwrap()));
+        }
+    }
+    let verify_result = hcaptch_verify(input_token.to_string(), conf.clone()).await;
+    match verify_result {
+        Ok(v) => {
+            if v == true {
+                //TODO 验证通过
+                log::info!("验证通过: {}", v);
+            }
+        },
+        Err(e) => {
+            log::info!(" 验证失败, {}", e);
+        }
+    }
 
-
-    let s = tmpl.render("account/reg.html", &tera::Context::new())
+    let s = tmpl.render("account/reg_result.html", &tera::Context::new())
         .map_err(|_| error::ErrorInternalServerError("Termplate error"));
 
     log::info!("The site name: {}", conf.site_name.to_owned());
