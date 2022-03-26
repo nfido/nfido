@@ -1,5 +1,5 @@
 
-dbdsn="user=postgres password=postgres dbname=nfido host=127.0.0.1 port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+dbdsn="postgres://postgres:postgres@127.0.0.1:5432/nfido?sslmode=disable&TimeZone=Asia/Shanghai"
 admin_user = ["admin","root"]
 admin_email = "admin@example.com"
 site_name = "nfido"
