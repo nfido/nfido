@@ -23,26 +23,41 @@ pub struct VerifyResult {
 }
 
 
-pub async fn hcaptch_verify(input_str: String, conf: web::Data<AppConfig> ) -> Option<bool> {
+pub async fn hcaptch_verify(input_str: String, conf: web::Data<AppConfig> ) -> Result<bool, &'static str> {
 
     //请求hcaptcha的接口，
     let secret_key = &conf.h_captcha_secret_key;
     // This will POST a body of `foo=bar&baz=quux`
     let params = [("response", input_str), ("secret", secret_key.to_owned())];
     let client = reqwest::Client::new();
-    let res  = client.post("https://hcaptcha.com/siteverify")
+    let response = client.post("https://hcaptcha.com/siteverify")
         .form(&params)
-        .send().await.unwrap();
+        .send()
+        .await;
+    match response {
+        Err(e) => println!("{}", e),
+        Ok(res) => {
+            let r  = res
+                .json::<VerifyResult>()
+                .await;
 
-    let t = res
-        .text()
-        .await.unwrap();
-       let r: VerifyResult = serde_json::from_str(&t).unwrap();
-        if r.success == true {
-            log::info!("校验通过: {}", true);
-            return Some(true);
+
+            match r {
+                Err(e) => println!("{}", e),
+                Ok(rr) => {
+
+                    if rr.success == true {
+                        log::info!("校验通过: {}", true);
+                        return Ok(true);
+                    }
+                }
+            }
+
+
         }
+    }
+
 
     //默认返回不成功
-    return Some(false)
+    return    Err("不成功");
 }
