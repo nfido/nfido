@@ -1,8 +1,10 @@
 use std::collections::HashMap;
 use std::sync::Arc;
 use actix_web::{get, post, error, web, Error, HttpResponse, Result, Responder};
+use actix_web::web::Data;
 use rbatis::crud::CRUD;
 use rbatis::rbatis::Rbatis;
+use tera::{Context, Tera};
 use crate::account::vo::check_email_req::CheckEmailReq;
 use crate::account::vo::check_username_req::CheckUsernameReq;
 use crate::account::vo::reg_form::RegForm;
@@ -111,11 +113,9 @@ pub async fn do_reg(_in_req: web::Form<RegForm>, tmpl: web::Data<tera::Tera>, co
         Some(token) => input_token = token,
         None => {
             log::info!(" token没有输入");
-            let s = tmpl.render("account/reg_result.html", &tera::Context::new())
-                .map_err(|_| error::ErrorInternalServerError("Termplate error"));
-
-            log::info!("The site name: {}", conf.site_name.to_owned());
-            return Ok(HttpResponse::Ok().content_type("text/html").body(s.unwrap()));
+            let mut ctx = tera::Context::new();
+            ctx.insert("msg", "验证未通过");
+           return display_reg_result(&tmpl, &conf, &ctx);
         }
     }
     let verify_result = hcaptch_verify(input_token.to_string(), conf.clone()).await;
@@ -128,6 +128,10 @@ pub async fn do_reg(_in_req: web::Form<RegForm>, tmpl: web::Data<tera::Tera>, co
         },
         Err(e) => {
             log::info!(" 验证失败, {}", e);
+
+            let mut ctx = tera::Context::new();
+            ctx.insert("msg", "验证未通过");
+           return  display_reg_result(&tmpl, &conf, &ctx)
         }
     }
 
@@ -136,4 +140,14 @@ pub async fn do_reg(_in_req: web::Form<RegForm>, tmpl: web::Data<tera::Tera>, co
 
     log::info!("The site name: {}", conf.site_name.to_owned());
     Ok(HttpResponse::Ok().content_type("text/html").body(s.unwrap()))
+}
+
+fn display_reg_result(tmpl: &Data<Tera>, conf: &Data<AppConfig>, x: &Context) -> std::result::Result<HttpResponse, Error> {
+
+
+    let s = tmpl.render("account/reg_result.html", x)
+        .map_err(|_| error::ErrorInternalServerError("Termplate error"));
+
+    log::info!("The site name: {}", conf.site_name.to_owned());
+    return Ok(HttpResponse::Ok().content_type("text/html").body(s.unwrap()));
 }
