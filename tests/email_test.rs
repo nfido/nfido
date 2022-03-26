@@ -9,6 +9,6 @@ fn it_adds_two() {
 #[test]
 fn get_env_var() {
     let v = env::var("KBUSER").expect("$USER is not set");
-    println!("{}", v);
+    println!("KBUSER name is: {}", v);
 
 }
