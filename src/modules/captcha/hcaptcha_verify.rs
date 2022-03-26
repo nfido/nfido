@@ -17,9 +17,10 @@ use serde::{Serialize,Deserialize};
 #[derive(Deserialize, Serialize)]
 pub struct VerifyResult {
     pub success: bool,
-    pub challenge_ts: String,
-    pub hostname: String,
-    pub credit: bool,
+    pub challenge_ts: Option<String>,
+    pub hostname: Option<String>,
+    pub credit: Option<bool>,
+
 }
 
 
@@ -37,6 +38,7 @@ pub async fn hcaptch_verify(input_str: String, conf: web::Data<AppConfig> ) -> R
     match response {
         Err(e) => println!("{}", e),
         Ok(res) => {
+            //TODO 加强校验
             let r  = res
                 .json::<VerifyResult>()
                 .await;
@@ -46,6 +48,7 @@ pub async fn hcaptch_verify(input_str: String, conf: web::Data<AppConfig> ) -> R
                 Err(e) => println!("{}", e),
                 Ok(rr) => {
 
+                    log::info!(" verifyResult: {}", &serde_json::to_string(&rr).unwrap());
                     if rr.success == true {
                         log::info!("校验通过: {}", true);
                         return Ok(true);

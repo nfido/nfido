@@ -2,10 +2,9 @@
 
 {% block content %}
 
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 
-<form method="post" action="" onsubmit="return disableButton(this);">
-    <input type="hidden" name="token" value="f7f105e02d4a9eb034b9278362ce11ad">
-    <input type="hidden" name="step" value="4">
+<form method="post" action="/account/doReg" onsubmit="return disableButton(this);">
     <table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
         <tbody><tr>
             <td bgcolor="#86a9b6">
@@ -21,6 +20,27 @@
                     <tr class="tablerow">
                         <td bgcolor="#FFFFFF" width="22%">E-Mail</td>
                         <td bgcolor="#f4f7f8"><input type="text" name="email" size="25" value=""></td>
+                    </tr>
+                    <tr class="tablerow">
+                        <td bgcolor="#FFFFFF" width="22%">Password</td>
+                        <td bgcolor="#f4f7f8"><input type="text" name="password" size="25" value=""></td>
+                    </tr>
+                    <tr class="tablerow">
+                        <td bgcolor="#FFFFFF" width="22%">Repeat password</td>
+                        <td bgcolor="#f4f7f8"><input type="text" name="password2" size="25" value=""></td>
+                    </tr>
+                    <tr class="tablerow">
+                        <td bgcolor="#FFFFFF" width="22%"> </td>
+                        <td bgcolor="#f4f7f8">
+                            <div class="h-captcha" data-sitekey="{{ captcha_key }}"></div>
+
+                        </td>
+                    </tr>   <tr class="tablerow">
+                        <td bgcolor="#FFFFFF" width="22%"> </td>
+                        <td bgcolor="#f4f7f8">
+                           <input type="submit" value="注册">
+
+                        </td>
                     </tr>
 
                     </tbody></table>
