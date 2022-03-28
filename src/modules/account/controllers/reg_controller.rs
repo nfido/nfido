@@ -135,6 +135,39 @@ pub async fn do_reg(_in_req: web::Form<RegForm>, tmpl: web::Data<tera::Tera>, co
         }
     }
 
+    //检测username
+    //查数据库表，看昵称是不是被占用了
+    let vf_username = rb
+        .fetch_by_column::<Option<NfidoMembers>, _>("username", &info.username)
+        .await
+        .unwrap();
+
+    if vf_username.is_some() {
+        //查到 了记录
+        log::info!(" 昵称被注册了, {}", e);
+
+        let mut ctx = tera::Context::new();
+        ctx.insert("msg", "昵称被注册了");
+        return  display_reg_result(&tmpl, &conf, &ctx)
+    }
+    //检测email
+    //查数据库表，看昵称是不是被占用了
+    let vf = rb
+        .fetch_by_column::<Option<NfidoMembers>, _>("email",&info.email)
+        .await
+        .unwrap();
+
+    if vf.is_some() {
+        //查到 了记录
+        log::info!(" 邮件被注册了, {}", e);
+
+        let mut ctx = tera::Context::new();
+        ctx.insert("msg", "邮件被注册了");
+        return  display_reg_result(&tmpl, &conf, &ctx)
+    }
+
+    
+
     let s = tmpl.render("account/reg_result.html", &tera::Context::new())
         .map_err(|_| error::ErrorInternalServerError("Termplate error"));
 
