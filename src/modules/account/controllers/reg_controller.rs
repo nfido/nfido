@@ -107,7 +107,14 @@ pub async fn check_email(info: web::Query<CheckEmailReq>, rb: web::Data<Arc<Rbat
 
 
 #[post("/account/doReg")]
-pub async fn do_reg(_in_req: web::Form<RegForm>, tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
+pub async fn do_reg(_in_req: web::Form<RegForm>,
+                    rb: web::Data<Arc<Rbatis>>,
+                    tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
+
+
+    //模板的context
+    let mut ctx = tera::Context::new();
+
     let  input_token;
     match &_in_req.token {
         Some(token) => input_token = token,
@@ -129,7 +136,6 @@ pub async fn do_reg(_in_req: web::Form<RegForm>, tmpl: web::Data<tera::Tera>, co
         Err(e) => {
             log::info!(" 验证失败, {}", e);
 
-            let mut ctx = tera::Context::new();
             ctx.insert("msg", "验证未通过");
            return  display_reg_result(&tmpl, &conf, &ctx)
         }
@@ -138,41 +144,39 @@ pub async fn do_reg(_in_req: web::Form<RegForm>, tmpl: web::Data<tera::Tera>, co
     //检测username
     //查数据库表，看昵称是不是被占用了
     let vf_username = rb
-        .fetch_by_column::<Option<NfidoMembers>, _>("username", &info.username)
+        .fetch_by_column::<Option<NfidoMembers>, _>("username", &_in_req.username)
         .await
         .unwrap();
 
     if vf_username.is_some() {
         //查到 了记录
-        log::info!(" 昵称被注册了, {}", e);
+        log::info!(" 昵称被注册了, {}", serde_json::to_string(&vf_username)?);
 
-        let mut ctx = tera::Context::new();
+
         ctx.insert("msg", "昵称被注册了");
         return  display_reg_result(&tmpl, &conf, &ctx)
     }
     //检测email
     //查数据库表，看昵称是不是被占用了
     let vf = rb
-        .fetch_by_column::<Option<NfidoMembers>, _>("email",&info.email)
+        .fetch_by_column::<Option<NfidoMembers>, _>("email",&_in_req.email)
         .await
         .unwrap();
 
     if vf.is_some() {
         //查到 了记录
-        log::info!(" 邮件被注册了, {}", e);
+        log::info!(" 邮件被注册了, {}", serde_json::to_string(&vf)?);
 
-        let mut ctx = tera::Context::new();
         ctx.insert("msg", "邮件被注册了");
         return  display_reg_result(&tmpl, &conf, &ctx)
     }
 
-    
 
-    let s = tmpl.render("account/reg_result.html", &tera::Context::new())
-        .map_err(|_| error::ErrorInternalServerError("Termplate error"));
+    ctx.insert("msg", "可以注册");
 
-    log::info!("The site name: {}", conf.site_name.to_owned());
-    Ok(HttpResponse::Ok().content_type("text/html").body(s.unwrap()))
+    //TODO 处理注册逻辑
+
+    return  display_reg_result(&tmpl, &conf, &ctx)
 }
 
 fn display_reg_result(tmpl: &Data<Tera>, conf: &Data<AppConfig>, x: &Context) -> std::result::Result<HttpResponse, Error> {
