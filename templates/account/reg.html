@@ -29,13 +29,16 @@
                         <td bgcolor="#FFFFFF" width="22%">Repeat password</td>
                         <td bgcolor="#f4f7f8"><input type="text" name="password2" size="25" value=""></td>
                     </tr>
+                    {% if captcha_key %}
                     <tr class="tablerow">
                         <td bgcolor="#FFFFFF" width="22%"> </td>
                         <td bgcolor="#f4f7f8">
                             <div class="h-captcha" data-sitekey="{{ captcha_key }}"></div>
 
                         </td>
-                    </tr>   <tr class="tablerow">
+                    </tr>
+                    {% endif %}
+                    <tr class="tablerow">
                         <td bgcolor="#FFFFFF" width="22%"> </td>
                         <td bgcolor="#f4f7f8">
                            <input type="submit" value="注册">
