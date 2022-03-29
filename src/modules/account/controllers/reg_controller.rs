@@ -1,8 +1,9 @@
 use std::collections::HashMap;
 use std::sync::Arc;
+use std::time::{SystemTime, UNIX_EPOCH};
 use actix_web::{get, post, error, web, Error, HttpResponse, Result, Responder};
 use actix_web::web::Data;
-use rbatis::crud::CRUD;
+use rbatis::crud::{CRUD, Skip};
 use rbatis::rbatis::Rbatis;
 use rbatis::snowflake::new_snowflake_id;
 use tera::{Context, Tera};
@@ -180,8 +181,18 @@ pub async fn do_reg(_in_req: web::Form<RegForm>,
     uinfo.username = _in_req.username.to_owned();
     uinfo.email = _in_req.email.to_owned();
     uinfo.password = _in_req.password.to_owned();
+
+
+    match SystemTime::now().duration_since(UNIX_EPOCH) {
+        Ok(n) => {
+           let i =  n.as_secs();
+            println!("1970-01-01 00:00:00 UTC was {} seconds ago!", i);
+            uinfo.regdate = Some(i);
+        },
+        Err(_) => panic!("SystemTime before UNIX EPOCH!"),
+    }
     //TODO 处理注册逻辑
-    let db_result = rb.save(&uinfo, &[]).await;
+    let db_result = rb.save(&uinfo, &[Skip::Column("uid")]).await;
     match db_result {
         Ok(t) => {
             log::info!("db_result, last insert_id: {}", serde_json::to_string(&t)?);
