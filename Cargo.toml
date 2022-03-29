@@ -6,6 +6,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+#密码加密
+argon2 = "0.4.0"
 
 log = "0.4.14"
 tera = "1.15.0"

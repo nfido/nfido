@@ -3,6 +3,7 @@ use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 use actix_web::{get, post, error, web, Error, HttpResponse, Result, Responder};
 use actix_web::web::Data;
+use argon2::{Argon2, PasswordHasher};
 use rbatis::crud::{CRUD, Skip};
 use rbatis::rbatis::Rbatis;
 use rbatis::snowflake::new_snowflake_id;
@@ -180,7 +181,14 @@ pub async fn do_reg(_in_req: web::Form<RegForm>,
     uinfo.uid = Option::from(new_snowflake_id());
     uinfo.username = _in_req.username.to_owned();
     uinfo.email = _in_req.email.to_owned();
-    uinfo.password = _in_req.password.to_owned();
+    // 密码加盐算hash
+
+    let hashed_pw = Argon2::default()
+        .hash_password(_in_req.password.to_owned().unwrap().as_bytes(), &conf.key_of_encrypt)
+        .unwrap()
+        .to_string();
+    uinfo.password = Some(hashed_pw);
+    //uinfo.password = _in_req.password.to_owned();
 
 
     match SystemTime::now().duration_since(UNIX_EPOCH) {
