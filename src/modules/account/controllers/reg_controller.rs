@@ -4,6 +4,7 @@ use actix_web::{get, post, error, web, Error, HttpResponse, Result, Responder};
 use actix_web::web::Data;
 use rbatis::crud::CRUD;
 use rbatis::rbatis::Rbatis;
+use rbatis::snowflake::new_snowflake_id;
 use tera::{Context, Tera};
 use crate::account::vo::check_email_req::CheckEmailReq;
 use crate::account::vo::check_username_req::CheckUsernameReq;
@@ -19,7 +20,9 @@ use crate::model::nfido_members::NfidoMembers;
 pub async fn reg(tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
     let mut ctx = tera::Context::new();
     //captcha key
-    ctx.insert("captcha_key", &conf.h_captcha_site_key);
+    if conf.captcha_enabled == 1 {
+        ctx.insert("captcha_key", &conf.h_captcha_site_key);
+    }
     let s = tmpl
         .render("account/reg.html", &ctx)
         .map_err(|_| error::ErrorInternalServerError("Termplate error"));
@@ -77,7 +80,7 @@ pub async fn check_email(info: web::Query<CheckEmailReq>, rb: web::Data<Arc<Rbat
 
     //查数据库表，看昵称是不是被占用了
     let vf = rb
-        .fetch_by_column::<Option<NfidoMembers>, _>("email",&info.email)
+        .fetch_by_column::<Option<NfidoMembers>, _>("email", &info.email)
         .await
         .unwrap();
 
@@ -105,7 +108,6 @@ pub async fn check_email(info: web::Query<CheckEmailReq>, rb: web::Data<Arc<Rbat
 }
 
 
-
 #[post("/account/doReg")]
 pub async fn do_reg(_in_req: web::Form<RegForm>,
                     rb: web::Data<Arc<Rbatis>>,
@@ -114,33 +116,34 @@ pub async fn do_reg(_in_req: web::Form<RegForm>,
 
     //模板的context
     let mut ctx = tera::Context::new();
-
-    let  input_token;
-    match &_in_req.token {
-        Some(token) => input_token = token,
-        None => {
-            log::info!(" token没有输入");
-            let mut ctx = tera::Context::new();
-            ctx.insert("msg", "验证未通过");
-           return display_reg_result(&tmpl, &conf, &ctx);
-        }
-    }
-    let verify_result = hcaptch_verify(input_token.to_string(), conf.clone()).await;
-    match verify_result {
-        Ok(v) => {
-            if v == true {
-                //TODO 验证通过
-                log::info!("验证通过: {}", v);
+    //如果开启了captcha
+    if conf.captcha_enabled == 1 {
+        let input_token;
+        match &_in_req.token {
+            Some(token) => input_token = token,
+            None => {
+                log::info!(" token没有输入");
+                let mut ctx = tera::Context::new();
+                ctx.insert("msg", "验证未通过");
+                return display_reg_result(&tmpl, &conf, &ctx);
             }
-        },
-        Err(e) => {
-            log::info!(" 验证失败, {}", e);
+        }
+        let verify_result = hcaptch_verify(input_token.to_string(), conf.clone()).await;
+        match verify_result {
+            Ok(v) => {
+                if v == true {
+                    //TODO 验证通过
+                    log::info!("验证通过: {}", v);
+                }
+            }
+            Err(e) => {
+                log::info!(" 验证失败, {}", e);
 
-            ctx.insert("msg", "验证未通过");
-           return  display_reg_result(&tmpl, &conf, &ctx)
+                ctx.insert("msg", "验证未通过");
+                return display_reg_result(&tmpl, &conf, &ctx);
+            }
         }
     }
-
     //检测username
     //查数据库表，看昵称是不是被占用了
     let vf_username = rb
@@ -154,12 +157,12 @@ pub async fn do_reg(_in_req: web::Form<RegForm>,
 
 
         ctx.insert("msg", "昵称被注册了");
-        return  display_reg_result(&tmpl, &conf, &ctx)
+        return display_reg_result(&tmpl, &conf, &ctx);
     }
     //检测email
     //查数据库表，看昵称是不是被占用了
     let vf = rb
-        .fetch_by_column::<Option<NfidoMembers>, _>("email",&_in_req.email)
+        .fetch_by_column::<Option<NfidoMembers>, _>("email", &_in_req.email)
         .await
         .unwrap();
 
@@ -168,20 +171,32 @@ pub async fn do_reg(_in_req: web::Form<RegForm>,
         log::info!(" 邮件被注册了, {}", serde_json::to_string(&vf)?);
 
         ctx.insert("msg", "邮件被注册了");
-        return  display_reg_result(&tmpl, &conf, &ctx)
+        return display_reg_result(&tmpl, &conf, &ctx);
     }
 
 
-    ctx.insert("msg", "可以注册");
-
+    let mut uinfo = NfidoMembers::default();
+    uinfo.uid = Option::from(new_snowflake_id());
+    uinfo.username = _in_req.username.to_owned();
+    uinfo.email = _in_req.email.to_owned();
+    uinfo.password = _in_req.password.to_owned();
     //TODO 处理注册逻辑
+    let db_result = rb.save(&uinfo, &[]).await;
+    match db_result {
+        Ok(t) => {
+            log::info!("db_result, last insert_id: {}", serde_json::to_string(&t)?);
+            ctx.insert("msg", "注册成功");
+        }
+        Err(e) => {
+            log::info!("error: {}", e);
+            ctx.insert("msg", "注册失败");
+        }
+    };
 
-    return  display_reg_result(&tmpl, &conf, &ctx)
+    return display_reg_result(&tmpl, &conf, &ctx);
 }
 
 fn display_reg_result(tmpl: &Data<Tera>, conf: &Data<AppConfig>, x: &Context) -> std::result::Result<HttpResponse, Error> {
-
-
     let s = tmpl.render("account/reg_result.html", x)
         .map_err(|_| error::ErrorInternalServerError("Termplate error"));
 
