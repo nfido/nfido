@@ -9,6 +9,12 @@ pub struct NfidoMembers {
     pub username: Option<String>,
     pub email: Option<String>,
     pub password: Option<String>,
+    pub bio: Option<String>,
+    pub sig: Option<String>,
+    pub ignoreu2u: Option<String>,
+    pub u2ufolders: Option<String>,
+
+
     //uid               integer       default nextval('nfido_members_seq'::regclass) not null
 
    // username          varchar(32)   default ''::character varying                  not null
@@ -16,7 +22,7 @@ pub struct NfidoMembers {
    // password          varchar(32)   default ''::character varying                  not null,
     pub regdate: Option<u64>,
     //regdate           integer       default 0                                      not null,
-   pub postnum: Option<u64>,
+  /* pub postnum: Option<u64>,
    // postnum           bigint        default 0                                      not null,
 
    // email             varchar(60)   default ''::character varying                  not null,
@@ -28,9 +34,8 @@ pub struct NfidoMembers {
    // status            varchar(35)   default ''::character varying                  not null,
    pub location: Option<String>,
    // location          varchar(50)   default ''::character varying                  not null,
-   pub bio: Option<String>,
+
    // bio               text                                                         not null,
-   pub sig: Option<String>,
    // sig               text                                                         not null,
    pub showemail: Option<String>,
    // showemail         varchar(15)   default ''::character varying                  not null,
@@ -67,7 +72,6 @@ pub struct NfidoMembers {
   //  dateformat        varchar(10)   default ''::character varying                  not null,
   pub dateformat: Option<String>,
   //  ignoreu2u         text                                                         not null,
-  pub ignoreu2u: Option<String>,
   //  lastvisit         integer       default 0                                      not null,
   pub lastvisit: Option<i32>,
   //  mood              varchar(128)  default 'Not Set'::character varying           not null,
@@ -77,7 +81,6 @@ pub struct NfidoMembers {
   //  invisible         smallint      default 0,
   pub invisible: Option<i8>,
   //  u2ufolders        text                                                         not null,
-    pub u2ufolders: Option<String>,
    // saveogu2u         char(3)       default ''::bpchar                             not null,
    pub saveogu2u: Option<String>,
    // emailonu2u        char(3)       default ''::bpchar                             not null,
@@ -97,7 +100,7 @@ pub struct NfidoMembers {
   //  sub_each_post     varchar(3)    default 'no'::character varying                not null,
   pub sub_each_post: Option<String>,
   //  waiting_for_mod   varchar(3)    default 'no'::character varying                not null
-  pub waiting_for_mod: Option<String>,
+  pub waiting_for_mod: Option<String>,*/
     
 }
  impl Default for NfidoMembers {
@@ -108,8 +111,12 @@ pub struct NfidoMembers {
              username: None,
              email: None,
              password: None,
+             bio: Some("".parse().unwrap()),
+             sig: Some("".parse().unwrap()),
              regdate: None,
-             postnum: None,
+             ignoreu2u: Some("".parse().unwrap()),
+             u2ufolders: Some("".parse().unwrap()),
+           /*  postnum: None,
              site: None,
              aim: None,
              status: None,
@@ -133,12 +140,10 @@ pub struct NfidoMembers {
              msn: None,
              ban: None,
              dateformat: None,
-             ignoreu2u: Some("".parse().unwrap()),
              lastvisit: None,
              mood: None,
              pwdate: None,
              invisible: None,
-             u2ufolders: Some("".parse().unwrap()),
              saveogu2u: None,
              emailonu2u: None,
              useoldu2u: None,
@@ -148,7 +153,7 @@ pub struct NfidoMembers {
              bad_session_date: None,
              bad_session_count: None,
              sub_each_post: None,
-             waiting_for_mod: None
+             waiting_for_mod: None*/
          }
      }
  }

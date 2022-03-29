@@ -23,5 +23,5 @@ tokio = { version = "1.12", features = ["full"] }
 async-std = { version = "1.9", features = ["attributes", "tokio1"] }
 #rbatis lib(debug_mode will print json data)
 rbson = { version = "2.0.3", features = ["uuid-0_8", "chrono-0_4"] }
-rbatis = { version = "3", features= ["debug_mode"]}
+rbatis = { version = "3.1.6", features= ["debug_mode"]}
 reqwest = {version = "0.11", features = ["json"]}
