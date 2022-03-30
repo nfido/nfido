@@ -1,11 +1,17 @@
+use std::sync::Arc;
 use actix_session::Session;
 use actix_web::{get, post, error, Error, HttpResponse, web, Responder, Result};
+use rbatis::crud::CRUD;
+use rbatis::rbatis::Rbatis;
 use crate::AppConfig;
 use crate::common::vo::common_result::CommonResult;
+use crate::mailer::mailer::MailDelivery;
+use crate::mailer::mailer_smtp::MailerSmtp;
 use crate::model::nfido_members::NfidoMembers;
 
 #[get("/account/sendVerifyEmail")]
 pub async fn send_verify_email(session: Session,
+                               rb: web::Data<Arc<Rbatis>>,
                                conf: web::Data<AppConfig>) -> Result<impl Responder> {
 
     if session.get::<Option<i64>>("uid").is_err() {
@@ -34,6 +40,23 @@ pub async fn send_verify_email(session: Session,
     }
 
 
+    let mailer = MailerSmtp{
+        smtp_host: conf.email.smtp_host.to_string(),
+        smtp_port: conf.email.smtp_port.to_string(),
+        smtp_user: conf.email.username.to_string(),
+        smtp_password: conf.email.password.to_string(),
+        from_email: conf.email.from_email.to_string(),
+
+    };
+   let sent_result =  mailer.send_email(vu.unwrap().email.unwrap(), "hello".to_string(), "world".to_string());
+    match sent_result {
+        Ok(t) => {
+            log::info!(" 邮件发送成功");
+        },
+        Err(e) => {
+            log::info!(" error: {}", e);
+        }
+    }
     //TODO 查用户资料，发邮件
     return Ok(web::Json(CommonResult::<String> {
         code: 0,
