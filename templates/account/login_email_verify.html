@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <form action="/account/emailVerify" method="post">
+    <table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+        <tbody><tr>
+            <td bgcolor="#86a9b6">
+                <table border="0" cellspacing="1px" cellpadding="5px" width="100%">
+                    <tbody><tr>
+                        <td colspan="2" class="category"><font color="#163c4b"><strong>信息:</strong></font></td>
+                    </tr>
+                    <tr class="tablerow">
+                        <td bgcolor="#FFFFFF" width="22%"></td>
+                        <td bgcolor="#f4f7f8"> {{ msg }}
+                        <button onclick="send_verify_email();">发送验证邮件</button>
+                        </td>
+                    </tr>
+
+                    <tr class="tablerow">
+                        <td bgcolor="#FFFFFF" width="22%">输入收到的验证码：</td>
+                        <td bgcolor="#f4f7f8"><input type="text" name="v_code" /> </td>
+                    </tr>
+
+                    <tr class="tablerow">
+                        <td bgcolor="#FFFFFF" width="22%"></td>
+                        <td bgcolor="#f4f7f8"> <input type="submit" value="验证"></td>
+                    </tr>
+
+
+                    </tbody></table>
+            </td>
+        </tr>
+        </tbody></table>
+    </form>
+<script type="text/javascript">
+    fetch("/account/sendVerifyEmail")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${ response.status }`);
+            }
+
+            return response.blob();
+        })
+        .then((response) => {
+            console.log(response);
+            window.alert("发送成功");
+        })
+        .catch(function (error) {
+            console.log("Error: " + error);
+        });
+</script>
+
+{% endblock content %}
