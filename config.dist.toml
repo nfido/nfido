@@ -6,6 +6,7 @@ site_name = "nfido"
 site_description = "My memory about leobbs"
 # 加密密码用的盐
 key_of_encrypt = "nfidoabc1314"
+cookie_prefix = "any"
 
 captcha_enabled=0
 h_captcha_site_key= ""

@@ -12,6 +12,8 @@ use std::borrow::Borrow;
 use actix_files::Files;
 use std::{env};
 use std::sync::Arc;
+use actix_session::{SessionMiddleware, storage::CookieSessionStore};
+use actix_web::cookie::Key;
 use actix_web::web::Data;
 use fast_log::config::Config as LogConfig;
 use rbatis::rbatis::Rbatis;
@@ -19,6 +21,7 @@ use crate::appconfig::appconfig::AppConfig;
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
+    std::env::set_var("RUST_LOG", "actix_web=info");
 
     //log
     fast_log::init(LogConfig::new().console()).unwrap();
@@ -69,6 +72,8 @@ async fn main() -> std::io::Result<()> {
 
         //应用 开始
         App::new()
+            .wrap(SessionMiddleware::new(CookieSessionStore::default(), Key::derive_from(app_config.cookie_prefix.as_bytes())))
+
             .app_data(Data::new(tera.to_owned()))
             .app_data(Data::new(rb.to_owned()))
             // 注入配置

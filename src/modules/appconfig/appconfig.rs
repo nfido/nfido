@@ -18,6 +18,8 @@ pub struct AppConfig {
     //site_description = "My memory about leobbs"
     //# 加密密码用的盐
     pub key_of_encrypt: String,
+    //Cookie prefix
+    pub cookie_prefix: String,
     //= "nfidoabc1314"
     // key_of_encrypt = "nfidoabc1314"
 
