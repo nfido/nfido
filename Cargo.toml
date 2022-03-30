@@ -10,6 +10,8 @@ edition = "2021"
 argon2 = "0.4.0"
 # session 存储
 actix-session = {version = "0.6.2",  features = ["cookie-session"]}
+# 电子邮件
+lettre = "0.10.0-rc"
 
 log = "0.4.14"
 tera = "1.15.0"
