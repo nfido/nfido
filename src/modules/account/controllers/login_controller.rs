@@ -1,4 +1,5 @@
 use std::sync::Arc;
+use actix_session::Session;
 use actix_web::{get,  error, web, Error, HttpResponse, Result};
 use actix_web::web::Data;
 use argon2::{Argon2, PasswordHash, PasswordVerifier};
@@ -13,6 +14,7 @@ use crate::model::nfido_members::NfidoMembers;
 #[get("/account/login")]
 pub async fn login(_in_req: web::Form<LoginForm>,
                    rb: web::Data<Arc<Rbatis>>,
+                   session: Session,
                    tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error>{
 
 
@@ -117,6 +119,9 @@ pub async fn login(_in_req: web::Form<LoginForm>,
 
 
     //TODO 记录cookie等信息
+    session.insert("v_uid", v_profile.uid);
+    session.insert("v_username", v_profile.username);
+    session.insert("v_status", v_profile.status);
 
 
     let s = tmpl.render("account/login_success.html", &tera::Context::new())
