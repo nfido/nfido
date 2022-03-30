@@ -1985,6 +1985,7 @@ dependencies = [
  "fast_log",
  "lettre",
  "log",
+ "rand",
  "rbatis",
  "rbson",
  "reqwest",

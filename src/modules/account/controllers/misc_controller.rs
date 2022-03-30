@@ -1,6 +1,7 @@
 use std::sync::Arc;
 use actix_session::Session;
 use actix_web::{get, post, error, Error, HttpResponse, web, Responder, Result};
+use rand::Rng;
 use rbatis::crud::CRUD;
 use rbatis::rbatis::Rbatis;
 use crate::AppConfig;
@@ -13,13 +14,12 @@ use crate::model::nfido_members::NfidoMembers;
 pub async fn send_verify_email(session: Session,
                                rb: web::Data<Arc<Rbatis>>,
                                conf: web::Data<AppConfig>) -> Result<impl Responder> {
-
     if session.get::<Option<i64>>("uid").is_err() {
-      return  Ok(web::Json(CommonResult::<String> {
+        return Ok(web::Json(CommonResult::<String> {
             code: 0,
             msg: "请先登录".to_string(),
             data: None,
-        }))
+        }));
     }
 
     //检测username
@@ -40,7 +40,7 @@ pub async fn send_verify_email(session: Session,
     }
 
 
-    let mailer = MailerSmtp{
+    let mailer = MailerSmtp {
         smtp_host: conf.email.smtp_host.to_string(),
         smtp_port: conf.email.smtp_port.to_string(),
         smtp_user: conf.email.username.to_string(),
@@ -48,11 +48,17 @@ pub async fn send_verify_email(session: Session,
         from_email: conf.email.from_email.to_string(),
 
     };
-   let sent_result =  mailer.send_email(vu.unwrap().email.unwrap(), "hello".to_string(), "world".to_string());
+
+
+    let mut rng = rand::thread_rng();
+    let verify_code = rng.gen_range(10000000..99999999);
+    log::info!("生成的验证码为: {}", verify_code);
+    session.insert("verify_code", verify_code);
+    let sent_result = mailer.send_email(vu.unwrap().email.unwrap(), "您的邮箱验证码".to_string(), verify_code.to_string());
     match sent_result {
         Ok(_) => {
             log::info!(" 邮件发送成功");
-        },
+        }
         Err(e) => {
             log::info!(" error: {}", e);
         }
@@ -62,12 +68,11 @@ pub async fn send_verify_email(session: Session,
         code: 0,
         msg: "己经发送".to_string(),
         data: None,
-    }))
-
+    }));
 }
 
 #[post("/account/emailVerify")]
-pub async fn email_verify(tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error>{
+pub async fn email_verify(tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
     let s = tmpl.render("account/login.html", &tera::Context::new())
         .map_err(|_| error::ErrorInternalServerError("Termplate error"));
 
