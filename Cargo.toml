@@ -13,6 +13,9 @@ actix-session = {version = "0.6.2",  features = ["cookie-session"]}
 # 电子邮件
 lettre = "0.10.0-rc"
 
+# 随机数生成
+rand = "0.8"
+
 log = "0.4.14"
 tera = "1.15.0"
 env_logger = "0.9.0"
