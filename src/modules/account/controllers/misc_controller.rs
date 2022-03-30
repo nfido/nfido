@@ -82,7 +82,6 @@ pub async fn email_verify(in_req: web::Form<EmailVerifyForm>,
                           rb: web::Data<Arc<Rbatis>>,
                           tmpl: web::Data<tera::Tera>,
                           conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
-
     let mut ctx = tera::Context::new();
 
     let input_verify_code = in_req.verify_code.unwrap();
@@ -95,7 +94,6 @@ pub async fn email_verify(in_req: web::Form<EmailVerifyForm>,
     }
 
     if verify_code.unwrap() != input_verify_code {
-
         session.remove("v_uid");
         session.remove("v_username");
         session.remove("v_verify_status");
@@ -137,6 +135,22 @@ pub async fn email_verify(in_req: web::Form<EmailVerifyForm>,
     log::info!("The site name: {}", conf.site_name.to_owned());
     Ok(HttpResponse::Ok().content_type("text/html").body(s.unwrap()))
 }
+
+
+#[get("/account/logout")]
+pub async fn logout(session: Session,
+                    tmpl: web::Data<tera::Tera>,
+                    conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
+    let mut ctx = tera::Context::new();
+
+    session.remove("v_uid");
+    session.remove("v_username");
+    session.remove("v_verify_status");
+    session.remove("verify_code");
+    ctx.insert("msg", r#"退出完毕，前往<a href="/">论坛首页</a>"#);
+    return display_misc_result(&tmpl, &conf, &ctx);
+}
+
 
 fn display_misc_result(tmpl: &Data<Tera>, conf: &Data<AppConfig>, x: &Context) -> std::result::Result<HttpResponse, Error> {
     let s = tmpl.render("account/reg_result.html", x)

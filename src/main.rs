@@ -104,6 +104,8 @@ async fn main() -> std::io::Result<()> {
             .service(account::controllers::misc_controller::send_verify_email)
             // 邮箱验证二阶段
             .service(account::controllers::misc_controller::email_verify)
+            //退出
+            .service(account::controllers::misc_controller::logout)
 
     })
         .bind(listen_port_str)?
