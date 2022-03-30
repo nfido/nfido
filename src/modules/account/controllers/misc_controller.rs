@@ -50,7 +50,7 @@ pub async fn send_verify_email(session: Session,
     };
    let sent_result =  mailer.send_email(vu.unwrap().email.unwrap(), "hello".to_string(), "world".to_string());
     match sent_result {
-        Ok(t) => {
+        Ok(_) => {
             log::info!(" 邮件发送成功");
         },
         Err(e) => {
