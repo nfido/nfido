@@ -1,9 +1,12 @@
 use std::sync::Arc;
 use actix_session::Session;
 use actix_web::{get, post, error, Error, HttpResponse, web, Responder, Result};
+use actix_web::web::Data;
 
 use rbatis::crud::CRUD;
 use rbatis::rbatis::Rbatis;
+use tera::{Context, Tera};
+use crate::account::vo::email_verify_form::EmailVerifyForm;
 use crate::AppConfig;
 use crate::common::vo::common_result::CommonResult;
 use crate::mailer::mailer::MailDelivery;
@@ -74,10 +77,71 @@ pub async fn send_verify_email(session: Session,
 }
 
 #[post("/account/emailVerify")]
-pub async fn email_verify(tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
-    let s = tmpl.render("account/login.html", &tera::Context::new())
+pub async fn email_verify(in_req: web::Form<EmailVerifyForm>,
+                          session: Session,
+                          rb: web::Data<Arc<Rbatis>>,
+                          tmpl: web::Data<tera::Tera>,
+                          conf: web::Data<AppConfig>) -> Result<HttpResponse, Error> {
+
+    let mut ctx = tera::Context::new();
+
+    let input_verify_code = in_req.verify_code.unwrap();
+
+    let verify_code = session.get::<i32>("verify_code")?;
+    log::info!("verify_code: {}", verify_code.unwrap());
+    if session.get::<i64>("v_uid").is_err() {
+        ctx.insert("msg", "请先登录");
+        return display_misc_result(&tmpl, &conf, &ctx);
+    }
+
+    if verify_code.unwrap() != input_verify_code {
+
+        session.remove("v_uid");
+        session.remove("v_username");
+        session.remove("v_verify_status");
+        session.remove("verify_code");
+        ctx.insert("msg", r#"请先 <a href="/account/login">登录</a>"#);
+        return display_misc_result(&tmpl, &conf, &ctx);
+    }
+
+    //检测username
+    //查数据库表，看昵称是不是被占用了
+    let uid = session.get::<i64>("v_uid")?.unwrap();
+    log::info!("uid: {}", uid);
+    let vu = rb
+        .fetch_by_column::<Option<NfidoMembers>, _>("uid", uid)
+        .await
+        .unwrap();
+
+    //没找到记录，登录失败
+    if vu.is_none() {
+        //查到 了记录
+
+        ctx.insert("msg", "请先登录");
+        return display_misc_result(&tmpl, &conf, &ctx);
+    }
+    let mut n_profile = vu.unwrap();
+    n_profile.verify_status = Some(1);
+
+
+    let w = rb.new_wrapper().eq("uid", n_profile.uid);
+    rb.update_by_wrapper(&n_profile, w, &[]).await;
+
+
+    session.remove("v_verify_status");
+    session.insert("v_verify_status", 1);
+
+    let s = tmpl.render("account/login_success.html", &tera::Context::new())
         .map_err(|_| error::ErrorInternalServerError("Termplate error"));
 
     log::info!("The site name: {}", conf.site_name.to_owned());
     Ok(HttpResponse::Ok().content_type("text/html").body(s.unwrap()))
+}
+
+fn display_misc_result(tmpl: &Data<Tera>, conf: &Data<AppConfig>, x: &Context) -> std::result::Result<HttpResponse, Error> {
+    let s = tmpl.render("account/reg_result.html", x)
+        .map_err(|_| error::ErrorInternalServerError("Termplate error"));
+
+    log::info!("The site name: {}", conf.site_name.to_owned());
+    return Ok(HttpResponse::Ok().content_type("text/html").body(s.unwrap()));
 }
