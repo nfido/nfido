@@ -1,5 +1,5 @@
 use std::sync::Arc;
-use actix_web::{get, error, web, Error, HttpResponse, Result};
+use actix_web::{get,  error, web, Error, HttpResponse, Result};
 use actix_web::web::Data;
 use argon2::{Argon2, PasswordHash, PasswordVerifier};
 use rbatis::crud::CRUD;
@@ -73,7 +73,7 @@ pub async fn login(_in_req: web::Form<LoginForm>,
     //没找到记录，登录失败
     if vu.is_none() {
         //查到 了记录
-        log::info!(" 登录失败, {}", serde_json::to_string(&vf_username)?);
+        log::info!(" 登录失败, {}", serde_json::to_string(&vu)?);
 
 
         ctx.insert("msg", "登录失败");
@@ -81,10 +81,16 @@ pub async fn login(_in_req: web::Form<LoginForm>,
     }
 
 
-    let v_profile = &vu.unwrap();
+    let v_profile = vu.unwrap();
 
-    let hash = PasswordHash::new(&v_profile.password.unwrap()).unwrap();
-    let result = Argon2::default().verify_password(_in_req.password.unwrap().as_bytes(), &hash);
+    if v_profile.password.is_none() {
+
+        ctx.insert("msg", "登录失败, 没有找到密码");
+        return display_login_result(&tmpl, &conf, &ctx);
+    }
+    let pw = v_profile.password.unwrap();
+    let hash = PasswordHash::new(&pw).unwrap();
+    let result = Argon2::default().verify_password(_in_req.password.as_ref().unwrap().as_bytes(), &hash);
     match result {
         Ok(()) => {
             log::info!("ok ");
@@ -111,6 +117,7 @@ pub async fn login(_in_req: web::Form<LoginForm>,
 
 
     //TODO 记录cookie等信息
+
 
     let s = tmpl.render("account/login_success.html", &tera::Context::new())
         .map_err(|_| error::ErrorInternalServerError("Termplate error"));

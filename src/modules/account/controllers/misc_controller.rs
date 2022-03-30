@@ -1,5 +1,5 @@
 
-use actix_web::{error, Error, HttpResponse, web};
+use actix_web::{get, post, error, Error, HttpResponse, web};
 use crate::AppConfig;
 
 #[get("/account/sendVerifyEmail")]

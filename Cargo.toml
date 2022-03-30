@@ -8,6 +8,8 @@ edition = "2021"
 [dependencies]
 #密码加密
 argon2 = "0.4.0"
+# session 存储
+actix-session = {version = "0.6.2",  features = ["cookie-session"]}
 
 log = "0.4.14"
 tera = "1.15.0"
