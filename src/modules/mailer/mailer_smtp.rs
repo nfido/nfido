@@ -27,7 +27,7 @@ impl MailDelivery for MailerSmtp {
         let creds = Credentials::new(self.smtp_user.to_string(),
                                      self.smtp_password.to_string());
 
-        let mailer = SmtpTransport::relay(&format!("{}:{}", &self.smtp_host , &self.smtp_port))
+        let mailer = SmtpTransport::relay(&self.smtp_host)
             .unwrap()
             .credentials(creds)
             .build();

@@ -1,8 +1,9 @@
 use std::sync::Arc;
 use actix_session::Session;
-use actix_web::{get,  error, web, Error, HttpResponse, Result};
+use actix_web::{get, post, error, web, Error, HttpResponse, Result};
 use actix_web::web::Data;
 use argon2::{Argon2, PasswordHash, PasswordVerifier};
+use rand::Rng;
 use rbatis::crud::CRUD;
 use rbatis::rbatis::Rbatis;
 use tera::{Context, Tera};
@@ -12,7 +13,15 @@ use crate::captcha::hcaptcha_verify::hcaptch_verify;
 use crate::model::nfido_members::NfidoMembers;
 
 #[get("/account/login")]
-pub async fn login(_in_req: web::Form<LoginForm>,
+pub async fn login(tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error>{
+    let s = tmpl.render("account/login.html", &tera::Context::new())
+        .map_err(|_| error::ErrorInternalServerError("Termplate error"));
+
+    log::info!("The site name: {}", conf.site_name.to_owned());
+    Ok(HttpResponse::Ok().content_type("text/html").body(s.unwrap()))
+}
+#[post("/account/doLogin")]
+pub async fn do_login(_in_req: web::Form<LoginForm>,
                    rb: web::Data<Arc<Rbatis>>,
                    session: Session,
                    tmpl: web::Data<tera::Tera>, conf: web::Data<AppConfig>) -> Result<HttpResponse, Error>{
@@ -108,11 +117,28 @@ pub async fn login(_in_req: web::Form<LoginForm>,
 
 
     //TODO 记录cookie等信息
-    session.insert("v_uid", v_profile.uid);
-    session.insert("v_username", v_profile.username);
-    session.insert("v_status", v_profile.status);
+    let v_uid = v_profile.uid.unwrap();
+    log::info!("v_uid: {}", v_uid);
+    session.insert("v_uid", v_uid);
+    let v_username = v_profile.username.unwrap();
+    log::info!("v_username: {}", v_username);
+    session.insert("v_username", v_username);
+    let v_verify_status = v_profile.verify_status.unwrap();
+    log::info!("v_verify_status: {}", v_verify_status);
+    session.insert("v_status", v_verify_status);
 
-    if v_profile.status.unwrap() != 1 {
+
+    let mut rng = rand::thread_rng();
+    let verify_code = rng.gen_range(10000000..99999999);
+    log::info!("生成的验证码为: {}", verify_code);
+    session.insert("verify_code", verify_code);
+
+
+    let vv_code = session.get::<i32>("verify_code");
+    log::info!("vv_code: {}", vv_code.unwrap().unwrap());
+
+
+    if v_verify_status != 1 {
         //需要验证邮箱了
         ctx.insert("msg", "点击进行邮箱验证");
 

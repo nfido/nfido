@@ -3,6 +3,26 @@
 {% block content %}
 
 
+<script type="text/javascript">
+    function send_verify_email() {
+        fetch("/account/sendVerifyEmail")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                return response.blob();
+            })
+            .then((response) => {
+                console.log(response);
+                window.alert("发送成功");
+            })
+            .catch(function (error) {
+                console.log("Error: " + error);
+            });
+    }
+</script>
+
     <form action="/account/emailVerify" method="post">
     <table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
         <tbody><tr>
@@ -14,7 +34,7 @@
                     <tr class="tablerow">
                         <td bgcolor="#FFFFFF" width="22%"></td>
                         <td bgcolor="#f4f7f8"> {{ msg }}
-                        <button onclick="send_verify_email();">发送验证邮件</button>
+                        <button type="button"  onclick="send_verify_email();">发送验证邮件</button>
                         </td>
                     </tr>
 
@@ -34,22 +54,5 @@
         </tr>
         </tbody></table>
     </form>
-<script type="text/javascript">
-    fetch("/account/sendVerifyEmail")
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${ response.status }`);
-            }
-
-            return response.blob();
-        })
-        .then((response) => {
-            console.log(response);
-            window.alert("发送成功");
-        })
-        .catch(function (error) {
-            console.log("Error: " + error);
-        });
-</script>
 
 {% endblock content %}
