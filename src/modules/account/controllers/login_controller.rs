@@ -106,6 +106,12 @@ pub async fn login(_in_req: web::Form<LoginForm>,
         }
     }
 
+
+    //TODO 记录cookie等信息
+    session.insert("v_uid", v_profile.uid);
+    session.insert("v_username", v_profile.username);
+    session.insert("v_status", v_profile.status);
+
     if v_profile.status.unwrap() != 1 {
         //需要验证邮箱了
         ctx.insert("msg", "点击进行邮箱验证");
@@ -118,10 +124,6 @@ pub async fn login(_in_req: web::Form<LoginForm>,
     }
 
 
-    //TODO 记录cookie等信息
-    session.insert("v_uid", v_profile.uid);
-    session.insert("v_username", v_profile.username);
-    session.insert("v_status", v_profile.status);
 
 
     let s = tmpl.render("account/login_success.html", &tera::Context::new())
