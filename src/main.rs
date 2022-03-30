@@ -72,7 +72,7 @@ async fn main() -> std::io::Result<()> {
 
         //应用 开始
         App::new()
-            .wrap(SessionMiddleware::new(CookieSessionStore::default(), Key::derive_from(app_config.cookie_prefix.as_bytes())))
+            .wrap(SessionMiddleware::new(CookieSessionStore::default(), Key::from(app_config.cookie_prefix.as_bytes())))
 
             .app_data(Data::new(tera.to_owned()))
             .app_data(Data::new(rb.to_owned()))
@@ -90,14 +90,21 @@ async fn main() -> std::io::Result<()> {
             .service(viewthread::controllers::home_controller::index)
             // 注册
             .service(account::controllers::reg_controller::reg)
-            //登录
+            // 登录
             .service(account::controllers::login_controller::login)
+            // 处理登录
+            .service(account::controllers::login_controller::do_login)
             //检测注册用户名
             .service(account::controllers::reg_controller::check_username)
             //检测注册邮箱
             .service(account::controllers::reg_controller::check_email)
             // 注册处理逻辑
             .service(account::controllers::reg_controller::do_reg)
+            // 邮箱验证一阶段
+            .service(account::controllers::misc_controller::send_verify_email)
+            // 邮箱验证二阶段
+            .service(account::controllers::misc_controller::email_verify)
+
     })
         .bind(listen_port_str)?
         .run()

@@ -1,7 +1,7 @@
 use std::sync::Arc;
 use actix_session::Session;
 use actix_web::{get, post, error, Error, HttpResponse, web, Responder, Result};
-use rand::Rng;
+
 use rbatis::crud::CRUD;
 use rbatis::rbatis::Rbatis;
 use crate::AppConfig;
@@ -14,7 +14,9 @@ use crate::model::nfido_members::NfidoMembers;
 pub async fn send_verify_email(session: Session,
                                rb: web::Data<Arc<Rbatis>>,
                                conf: web::Data<AppConfig>) -> Result<impl Responder> {
-    if session.get::<Option<i64>>("uid").is_err() {
+    let verify_code = session.get::<i32>("verify_code")?;
+    log::info!("verify_code: {}", verify_code.unwrap());
+    if session.get::<i64>("v_uid").is_err() {
         return Ok(web::Json(CommonResult::<String> {
             code: 0,
             msg: "请先登录".to_string(),
@@ -24,8 +26,10 @@ pub async fn send_verify_email(session: Session,
 
     //检测username
     //查数据库表，看昵称是不是被占用了
+    let uid = session.get::<i64>("v_uid")?.unwrap();
+    log::info!("uid: {}", uid);
     let vu = rb
-        .fetch_by_column::<Option<NfidoMembers>, _>("uid", session.get::<Option<i64>>("uid").unwrap())
+        .fetch_by_column::<Option<NfidoMembers>, _>("uid", uid)
         .await
         .unwrap();
 
@@ -50,10 +54,8 @@ pub async fn send_verify_email(session: Session,
     };
 
 
-    let mut rng = rand::thread_rng();
-    let verify_code = rng.gen_range(10000000..99999999);
-    log::info!("生成的验证码为: {}", verify_code);
-    session.insert("verify_code", verify_code);
+    let verify_code = session.get::<i32>("verify_code").unwrap().unwrap();
+    log::info!("verify_code: {}", verify_code);
     let sent_result = mailer.send_email(vu.unwrap().email.unwrap(), "您的邮箱验证码".to_string(), verify_code.to_string());
     match sent_result {
         Ok(_) => {

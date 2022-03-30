@@ -13,7 +13,7 @@ pub struct NfidoMembers {
     pub sig: Option<String>,
     pub ignoreu2u: Option<String>,
     pub u2ufolders: Option<String>,
-    pub status: Option<i8>,
+    pub verify_status: Option<i8>,
 
 
     //uid               integer       default nextval('nfido_members_seq'::regclass) not null
@@ -117,7 +117,7 @@ pub struct NfidoMembers {
              regdate: None,
              ignoreu2u: Some("".parse().unwrap()),
              u2ufolders: Some("".parse().unwrap()),
-             status: Some(0),
+             verify_status: Some(0),
            /*  postnum: None,
              site: None,
              aim: None,
