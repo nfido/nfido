@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<table cellspacing="0" cellpadding="1" border="0" width="97%" align="center">
+    <tbody><tr>
+        <td><table width="100%" cellspacing="0" cellpadding="5px" align="center">
+            <tbody><tr>
+                <td class="nav"> <a href="./">Your Forums</a>  » <a href="forumdisplay.php?fid=1">Default Forum</a> » Post New Topic</td>
+                <td align="right"><select onchange="if (this.options[this.selectedIndex].value) {window.location=(''+this.options[this.selectedIndex].value)}">
+                    <option value="">Select A Forum</option>
+                    <option value="forumdisplay.php?fid=1" selected="selected"> &nbsp; » Default Forum</option>
+                </select></td>
+                <td align="right" width="1"><a href="#bottom" title="Go To Bottom"><img src="images/davis/arrow_dw.gif" border="0" alt="Go To Bottom"></a></td>
+            </tr>
+            </tbody></table>
+        </td>
+    </tr>
+    </tbody></table>
+
+<br />
+
+<form method="post" name="input" action="post.php?action=newthread&amp;fid=1" enctype="multipart/form-data" onsubmit="return disableButton(this);">
+    <input type="hidden" name="token" value="">
+    <table cellspacing="0" cellpadding="0" border="0" width="97%" align="center">
+        <tbody><tr>
+            <td bgcolor="#86a9b6">
+                <table border="0" cellspacing="1px" cellpadding="5px" width="100%">
+                    <tbody><tr>
+                        <td colspan="2" class="category"><font color="#163c4b"><strong>Post New Topic</strong></font></td>
+                    </tr>
+                    <tr class="tablerow">
+                        <td bgcolor="#FFFFFF" width="22%">Logged In User:</td>
+                        <td bgcolor="#f4f7f8">admin <span class="smalltxt">[<a href="misc.php?action=logout">logout</a>]</span></td>
+                    </tr>
+
+
+                    <tr class="tablerow">
+                        <td bgcolor="#FFFFFF">Subject:</td>
+                        <td bgcolor="#f4f7f8"><input type="text" name="subject" size="45" value=""></td>
+                    </tr>
+                    <tr class="tablerow">
+                        <td bgcolor="#FFFFFF" valign="top">Icon:</td>
+                        <td bgcolor="#FFFFFF"><input type="radio" name="posticon" value="" checked="checked"> <img src="images/davis/default_icon.gif" alt="[*]" border="0"> <input type="radio" name="posticon" value="cool.gif"><img src="images/smilies/cool.gif" alt="" border="0"> <input type="radio" name="posticon" value="mad.gif"><img src="images/smilies/mad.gif" alt="" border="0"> <input type="radio" name="posticon" value="thumbup.gif"><img src="images/smilies/thumbup.gif" alt="" border="0"> <input type="radio" name="posticon" value="thumbdown.gif"><img src="images/smilies/thumbdown.gif" alt="" border="0"> <input type="radio" name="posticon" value="post.gif"><img src="images/smilies/post.gif" alt="" border="0"> <input type="radio" name="posticon" value="exclamation.gif"><img src="images/smilies/exclamation.gif" alt="" border="0"> <input type="radio" name="posticon" value="info.gif"><img src="images/smilies/info.gif" alt="" border="0"> <input type="radio" name="posticon" value="question.gif"><img src="images/smilies/question.gif" alt="" border="0"></td>
+                    </tr>
+                    <script type="text/javascript">advmode=true;normalmode=false;</script>
+                    <tr class="tablerow">
+                        <td bgcolor="#FFFFFF">Formatting Mode:<br><span class="smalltxt">
+<input type="radio" name="mode" value="2" onclick="chmode('2')"> Normal<br>
+<input type="radio" name="mode" value="0" onclick="chmode('0')" checked="checked"> Advanced<br>
+<input type="radio" name="mode" value="1" onclick="chmode('1')"> Help</span></td>
+                        <td bgcolor="#f4f7f8">
+                            <select name="font" onchange="chfont(this.options[this.selectedIndex].value)" size="1">
+                                <option value="" id="zerofont" selected="selected">Font:</option>
+                                <option value="Andale Mono">Andale Mono</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Arial Black">Arial Black</option>
+                                <option value="Book Antiqua">Book Antiqua</option>
+                                <option value="Century Gothic">Century Gothic</option>
+                                <option value="Comic Sans MS">Comic Sans MS</option>
+                                <option value="Courier New">Courier New</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Impact">Impact</option>
+                                <option value="Tahoma">Tahoma</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Trebuchet MS">Trebuchet MS</option>
+                                <option value="Script MT Bold">Script MT Bold</option>
+                                <option value="Stencil">Stencil</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Lucida Console">Lucida Console</option>
+                            </select>
+                            <select name="size" onchange="chsize(this.options[this.selectedIndex].value)" size="1">
+                                <option value="-2">-2</option>
+                                <option value="-1">-1</option>
+                                <option value="0" id="zerosize" selected="selected">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                            <select name="color" onchange="chcolor(this.options[this.selectedIndex].value)" size="1">
+                                <option value="" id="zerocolor" selected="selected">Text Color:</option>
+                                <option value="White" style="color:white;">White</option>
+                                <option value="Black" style="color:black;">Black</option>
+                                <option value="Red" style="color:red;">Red</option>
+                                <option value="Yellow" style="color:yellow;">Yellow</option>
+                                <option value="Pink" style="color:pink;">Pink</option>
+                                <option value="Green" style="color:green;">Green</option>
+                                <option value="Orange" style="color:orange;">Orange</option>
+                                <option value="Purple" style="color:purple;">Purple</option>
+                                <option value="Blue" style="color:blue;">Blue</option>
+                                <option value="Beige" style="color:beige;">Beige</option>
+                                <option value="Brown" style="color:brown;">Brown</option>
+                                <option value="Teal" style="color:teal;">Teal</option>
+                                <option value="Navy" style="color:navy;">Navy</option>
+                                <option value="Maroon" style="color:maroon;">Maroon</option>
+                                <option value="LimeGreen" style="color:limegreen;">LimeGreen</option>
+                            </select>
+
+                            <br>
+                            <a href="javascript:bold()" accesskey="b" title="Insert Bold text"><img src="images/davis/bb_bold.gif" border="0" width="23" height="22" alt="Insert Bold text"></a>
+                            <a href="javascript:italicize()" accesskey="i" title="Insert Italicised text"><img src="images/davis/bb_italicize.gif" border="0" width="23" height="22" alt="Insert Italicised text"></a>
+                            <a href="javascript:underline()" accesskey="u" title="Insert Underlined text"><img src="images/davis/bb_underline.gif" border="0" width="23" height="22" alt="Insert Underlined text"></a>
+                            <a href="javascript:center()" title="Insert Centered text"><img src="images/davis/bb_center.gif" border="0" width="23" height="22" alt="Insert Centered text"></a>
+                            <a href="javascript:hyperlink()" title="Insert a Hyperlink"><img src="images/davis/bb_url.gif" border="0" width="23" height="22" alt="Insert a Hyperlink"></a>
+                            <a href="javascript:email()" title="Insert E-mail Hyperlink"><img src="images/davis/bb_email.gif" border="0" width="23" height="22" alt="Insert E-mail Hyperlink"></a>
+                            <a href="javascript:image()" title="Insert an Image"><img src="images/davis/bb_image.gif" border="0" width="23" height="22" alt="Insert an Image"></a>
+                            <a href="javascript:code()" title="Insert Code Formatted text"><img src="images/davis/bb_code.gif" border="0" width="23" height="22" alt="Insert Code Formatted text"></a>
+                            <a href="javascript:quote()" title="Insert Quoted text"><img src="images/davis/bb_quote.gif" border="0" width="23" height="22" alt="Insert Quoted text"></a>
+                            <a href="javascript:list()" title="Insert List"><img src="images/davis/bb_list.gif" border="0" width="23" height="22" alt="Insert List"></a>
+                            <a href="javascript:youtube()" title="Insert YouTube Video"><img src="images/davis/bb_youtube.gif" border="0" width="23" height="22" alt="Insert YouTube Video"></a>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="tablerow" bgcolor="#FFFFFF" valign="top">Message:<br>
+                            <span class="smalltxt">HTML is Off<br>
+Smilies are On<br>
+<a href="faq.php?page=messages#7">BB Code</a> is On<br>
+[img] Code is On</span></td>
+                        <td class="tablerow" bgcolor="#f4f7f8">
+                            <table width="100%">
+                                <tbody><tr>
+                                    <td width="70%" rowspan="2"><textarea rows="12" cols="65" name="message" id="message" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);"></textarea></td>
+                                    <td>
+                                        <table align="center">
+                                            <tbody><tr><td valign="top"><a style="cursor:hand" onclick="javascript:icon(':)')"><img src="images/smilies/smile.gif" border="0" alt=":)"></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(':(')"><img src="images/smilies/sad.gif" border="0" alt=":("></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(':thumbdown:')"><img src="images/smilies/thumbdown.gif" border="0" alt=":thumbdown:"></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(';)')"><img src="images/smilies/wink.gif" border="0" alt=";)"></a></td>
+
+                                            </tr><tr><td valign="top"><a style="cursor:hand" onclick="javascript:icon(':cool:')"><img src="images/smilies/cool.gif" border="0" alt=":cool:"></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(':mad:')"><img src="images/smilies/mad.gif" border="0" alt=":mad:"></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(':punk:')"><img src="images/smilies/punk.gif" border="0" alt=":punk:"></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(':blush:')"><img src="images/smilies/blush.gif" border="0" alt=":blush:"></a></td>
+
+                                            </tr><tr><td valign="top"><a style="cursor:hand" onclick="javascript:icon(':love:')"><img src="images/smilies/love.gif" border="0" alt=":love:"></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(':ninja:')"><img src="images/smilies/ninja.gif" border="0" alt=":ninja:"></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(':fake sniffle:')"><img src="images/smilies/fake_sniffle.gif" border="0" alt=":fake sniffle:"></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(':smilegrin:')"><img src="images/smilies/smilegrin.gif" border="0" alt=":smilegrin:"></a></td>
+
+                                            </tr><tr><td valign="top"><a style="cursor:hand" onclick="javascript:icon(':kiss:')"><img src="images/smilies/kiss.gif" border="0" alt=":kiss:"></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(':no:')"><img src="images/smilies/no.gif" border="0" alt=":no:"></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(':post:')"><img src="images/smilies/post.gif" border="0" alt=":post:"></a></td>
+
+                                                <td valign="top"><a style="cursor:hand" onclick="javascript:icon(':lol:')"><img src="images/smilies/lol.gif" border="0" alt=":lol:"></a></td>
+
+                                            </tr>
+                                            </tbody></table>
+                                    </td>
+
+
+                                </tr>
+                                <tr><td class="ctrtablerow smalltxt"><a href="misc.php?action=smilies" onclick="Popup(this.href, 'Window', 175, 250); return false;">[More smilies]</a></td></tr>
+                                </tbody></table>
+                            <br>
+                            <input type="checkbox" name="smileyoff" value="yes"> Disable Smilies?<br>
+                            <input type="checkbox" name="usesig" value="yes"> Use signature?<br>
+                            <input type="checkbox" name="bbcodeoff" value="yes"> Turn BBCode off?<br><input type="checkbox" name="emailnotify" value="yes"> Receive e-mail on reply?
+                            <br><input type="checkbox" name="toptopic" value="yes"> Top this topic? <br><input type="checkbox" name="closetopic" value="yes"> Close topic on reply?<br></td>
+                    </tr>
+                    <tr class="tablerow">
+                        <td bgcolor="#FFFFFF">Attachment:</td>
+                        <td bgcolor="#f4f7f8" id="uploads">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="256000">
+                            <input type="file" name="attach1" size="20"> Upload size limit is 250kB.  Image limit is 1000x1000.
+                        </td>
+                    </tr>
+                    <tr class="tablerow" id="multiattachrow">
+                        <td bgcolor="#FFFFFF">Multi-Attach:</td>
+                        <td bgcolor="#f4f7f8">
+                            <a href="javascript:multiAttach()" id="multiattachlink">Click here to upload another file</a>
+                        </td>
+                    </tr>
+                    <script type="text/javascript">
+                        <!--//--><![CDATA[//><!--
+                        var uploadBoxCount = 1;
+                        var uploadBoxMax = 10;
+                        var uploadTotalLimits = 'Multiple upload size limit per submission is 2.4MB';
+
+                        if (uploadBoxMax > 1) {
+                            document.getElementById('multiattachrow').removeAttribute('style');
+                        }
+
+                        function multiAttach() {
+                            var newnode = document.createElement('span');
+                            if (uploadBoxCount < uploadBoxMax) {
+                                uploadBoxCount++;
+                                newnode.innerHTML = '<br /><input type="file" name="attach' + uploadBoxCount + '" size="20" />';
+                                document.getElementById('uploads').appendChild(newnode);
+                                if (uploadBoxCount == 2 && uploadTotalLimits != '') {
+                                    document.getElementById('multiattachlink').parentNode.innerHTML += '<br />' + uploadTotalLimits;
+                                }
+                            }
+                            if (uploadBoxCount >= uploadBoxMax) {
+                                noMoreMultiAttach();
+                            }
+                        }
+
+                        function noMoreMultiAttach() {
+                            var multiAttachRow;
+                            if (uploadBoxCount == 1) {
+                                multiAttachRow = document.getElementById('multiattachrow');
+                                multiAttachRow.parentNode.removeChild(multiAttachRow);
+                            } else {
+                                document.getElementById('multiattachlink').parentNode.innerHTML = uploadTotalLimits;
+                            }
+                        }
+                        //--><!]]>
+                    </script>
+
+
+
+                    <tr>
+                        <td class="ctrtablerow" bgcolor="#f4f7f8" colspan="2"><input type="submit" class="submit" name="topicsubmit" value="Post New Topic">&nbsp;<input type="submit" class="submit" name="previewpost" value="Preview Post">&nbsp; &nbsp;</td>
+                    </tr>
+                    </tbody></table>
+            </td>
+        </tr>
+        </tbody></table>
+
+</form>
+
+<br />
+
+<table cellspacing="1px" cellpadding="0" border="0" width="97%" align="center" bgcolor="#86a9b6">
+    <tbody><tr>
+        <td>
+            <table width="100%" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td class="nav" style="padding-bottom: 1px" bgcolor="#f4f7f8">&nbsp;<a href="./">Your Forums</a> » <a href="forumdisplay.php?fid=1">Default Forum</a> » Post New Topic</td>
+                    <td class="tablerow" align="right" bgcolor="#f4f7f8"><select onchange="if (this.options[this.selectedIndex].value) {window.location=(''+this.options[this.selectedIndex].value)}">
+                        <option value="">Select A Forum</option>
+                        <option value="forumdisplay.php?fid=1" selected="selected"> &nbsp; » Default Forum</option>
+                    </select>&nbsp;</td>
+                    <td align="right" bgcolor="#f4f7f8" width="2%"><a href="#top" title="Go To Top"><img src="images/davis/arrow_up.gif" style="margin-right: 3px" border="0" alt="Go To Top"></a></td>
+                </tr>
+                </tbody></table>
+        </td>
+    </tr>
+    </tbody></table>
+
+{% endblock content %}
