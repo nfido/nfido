@@ -28,20 +28,20 @@ if (!defined('IN_CODE')) {
 }
 
 // Database connection settings
-    $dbname         = 'DB/NAME';   // Name of your database
-    $dbuser         = 'DB/USER';   // Username used to access it
-    $dbpw           = 'DB/PW';     // Password used to access it
-    $dbhost         = 'localhost'; // Database host, usually 'localhost'
+    $dbname         = 'xmp';   // Name of your database
+    $dbuser         = 'admin';   // Username used to access it
+    $dbpw           = 'helloworld';     // Password used to access it
+    $dbhost         = '172.31.39.190'; // Database host, usually 'localhost'
     $database       = 'mysql';     // Database type, currently only mysql is supported.
     $pconnect       = 0;           // Persistent connection, 1 = on, 0 = off, use if 'too many connections'-errors appear
 
 // Table Settings
-    $tablepre       = 'TABLE/PRE'; // XMB will prefix each table name with the string you specify here.  'xmb_' is a common choice.
+    $tablepre       = 'xmb_'; // XMB will prefix each table name with the string you specify here.  'xmb_' is a common choice.
 
 // Address settings
     // In full_url, put the full URL you see when you go to your boards, WITHOUT the filename though!!
     // And please, remember to add the / at the end...
-    $full_url       = 'FULLURL';
+    $full_url       = 'http://localhost:8111/';
 
 // Other settings
     // Adds comments to all template output like <!-- template start: index -->...<!-- template end: index -->
@@ -60,10 +60,10 @@ if (!defined('IN_CODE')) {
     $mailer['type']     = 'default';
 
     // mailer-options (for socket_SMTP only, currently)
-    $mailer['username'] = 'MAILER_USER';
-    $mailer['password'] = 'MAILER_PASS';
-    $mailer['host']     = 'MAILER_HOST';
-    $mailer['port']     = 'MAILER_PORT';
+    $mailer['username'] = 'username';
+    $mailer['password'] = 'password';
+    $mailer['host']     = 'mail.example.com';
+    $mailer['port']     = '25';
 
 // Plugin Settings
     $i = 1;
@@ -104,7 +104,7 @@ if (!defined('IN_CODE')) {
 
     $ipcheck        = 'off';
     $allow_spec_q   = FALSE;
-    $show_full_info = TRUE;
+    $show_full_info = FALSE;
 
 // Debug-mode
 
