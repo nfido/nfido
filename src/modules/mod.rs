@@ -12,3 +12,4 @@ pub mod captcha;
 
 //电子邮件处理
 pub mod mailer;
+pub mod admin;
