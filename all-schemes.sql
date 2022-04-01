@@ -76,7 +76,7 @@ create sequence xmb_forums_seq;
 
 create table xmb_forums
 (
-    type         varchar(15)  default ''        not null,
+    f_type         varchar(15)  default ''        not null,
     fid          smallint default nextval ('xmb_forums_seq')
         primary key,
     name         varchar(128) default ''        not null,
@@ -112,7 +112,7 @@ create index status
     on xmb_forums (status);
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-create index type
-    on xmb_forums (type);
+create index f_type
+    on xmb_forums (f_type);
 
 -- nfido_forums 结束
